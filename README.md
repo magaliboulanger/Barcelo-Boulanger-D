@@ -4,7 +4,7 @@
 ## Registro de compras y pagos (Control de stock)
 Comunicación con 2 APIs (de heladeras y kiosco). Otra opción es el pago por la app (para ambas situaciones, heladera o kiosco). En ambos casos los sistemas deben interactuar en los dos sentidos.  
 ### Pago desde app
-Heladera: aviso por seguridad para retirar el producto la persona adecuada.
+Heladera: aviso por seguridad para retirar el producto la persona adecuada.  
 Kiosco: aviso al sistema del kiosco.  
 ### Pago en persona
 Kiosco: API del kiosco.  
@@ -36,13 +36,13 @@ Casos:
 ![Diagrama de Casos de Uso](/Images/DiagramaCasosDeUso.jpeg "Diagrama de casos de uso")
 
 # Atributos de calidad 
-Escenarios:
-**Accesibilidad (movilidad accesible)**: Aplicación web y mobile.  
-**Accuracy y Disponibilidad:** Rápida recuperación/refresco ante fallas o actualizaciones.  
-**Performance y Confiabilidad:** Funcionamiento aceptable si disminuye ancho de banda. Siendo aceptable poder finalizar o abortar una transacción comenzada antes de la disminución informando al usuario en cada caso.  
-**Seguridad (en los pagos):** Registro completo de transacciones y protección de los datos.  
-**Escalabilidad:** Soporte para más distribuidores/usuarios.  
-**Facilidad de integración**   
+Escenarios:  
+* **Accesibilidad (movilidad accesible)**: Aplicación web y mobile.  
+* **Accuracy y Disponibilidad:** Rápida recuperación/refresco ante fallas o actualizaciones.  
+* **Performance y Confiabilidad:** Funcionamiento aceptable si disminuye ancho de banda. Siendo aceptable poder finalizar o abortar una transacción comenzada antes de la disminución informando al usuario en cada caso.  
+* **Seguridad (en los pagos):** Registro completo de transacciones y protección de los datos.  
+* **Escalabilidad:** Soporte para más distribuidores/usuarios.  
+* **Facilidad de integración**   
 
 # Restricciones 
 * Aplicación web accesible desde móviles y diferentes plataformas (Windows, Linux, OsX).
