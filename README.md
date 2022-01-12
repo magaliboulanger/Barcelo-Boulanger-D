@@ -4,11 +4,11 @@
 ## Registro de compras y pagos (Control de stock)
 Comunicación con 2 APIs (de heladeras y kiosco). Otra opción es el pago por la app (para ambas situaciones, heladera o kiosco). En ambos casos los sistemas deben interactuar en los dos sentidos.  
 ### Pago desde app
-Heladera: aviso por seguridad para retirar el producto la persona adecuada.  
-Kiosco: aviso al sistema del kiosco.  
-### Pago en persona
-Kiosco: API del kiosco.  
-Heladera: API de la heladera (La heladera tiene el control del pago, no hay persona). 
+**Heladera:** aviso por seguridad para retirar el producto la persona adecuada.  
+**Kiosco:** aviso al sistema del kiosco.  
+### Pago en persona  
+**Heladera:** API de la heladera (La heladera tiene el control del pago, no hay persona).  
+**Kiosco:** API del kiosco.
 
 * Agregado de stock lo hacen las APIs (heladera y kiosco) cuando reciben stock. 
 * El eliminado es realizado por las APIs con las ventas.
