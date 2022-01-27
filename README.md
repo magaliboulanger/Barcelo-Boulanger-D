@@ -54,3 +54,5 @@ Casos:
 * Aplicación web accesible desde móviles y diferentes plataformas (Windows, Linux, OsX).
 * Los distribuidores y usuarios podrían tener bajo ancho de banda.
 * Debe soportarse un mínimo de 100 usuarios simultáneos.
+* La aplicación debe comunicarse con las API de heladeras, kioscos y métodos de pago.
+
