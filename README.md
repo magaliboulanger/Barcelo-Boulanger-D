@@ -32,17 +32,23 @@ Casos:
 7. Crear promociones : Agregar promociones a la lista de promociones del sistema.
 8. Ver puntos de venta : El usuario puede ver una lista de todos los puntos de venta del sistema, con reseña, calificación promedio y ubicación. Se puede filtrar por productos en stock, distancia, tipo de comercio, etc.
 9. Ver información de usuario : El usuario puede acceder a su información personal y su historial de compras.
+10. Login: El usuario puede ingresar al sistema con un nombre de usuario y contraseña.
+11. Registro: Un usuario puede registrarse como comprador o punto de venta, creando una cuenta con usuario, contraseña e información del perfil.
 
-![Diagrama de Casos de Uso](/Images/DiagramaCasosDeUso.jpeg "Diagrama de casos de uso")
+![Diagrama de Casos de Uso](/Images/DiagramaCasosDeUso.png "Diagrama de casos de uso")
 
 # Atributos de calidad 
-Escenarios:  
-* **Accesibilidad (movilidad accesible)**: Aplicación web y mobile.  
-* **Accuracy y Disponibilidad:** Rápida recuperación/refresco ante fallas o actualizaciones.  
-* **Performance y Confiabilidad:** Funcionamiento aceptable si disminuye ancho de banda. Siendo aceptable poder finalizar o abortar una transacción comenzada antes de la disminución informando al usuario en cada caso.  
-* **Seguridad (en los pagos):** Registro completo de transacciones y protección de los datos.  
-* **Escalabilidad:** Soporte para más distribuidores/usuarios.  
-* **Facilidad de integración**   
+| Atributo | Escenario | Casos de uso relacionados |
+|-----------|-----------|------------------------|
+| Accesibilidad (movilidad accesible) | Un usuario accede a la aplicación desde cualquier dispositivo con conexión a internet  | Todos |
+| Disponibilidad | Ante una falla durante el normal funcionamiento del sistema, las operaciones se recuperan en menos de 60 segundos | Todos | 
+| Accuracy | Ante una actualizacion en el stock, informacion o distribuidores, los usuarios obtienen esta información en menos de 60 segundos | CU4 - CU5 - CU7 - CU8 - CU9 - CU11 |
+| Performance y Confiabilidad |Ante una disminución en el ancho de banda, todas las transacciones se pueden finalizar o abortar informando al usuario en cada caso. | CU1 - CU2 - CU3 |
+| Seguridad (en los pagos) | Un usuario realiza una transacción mediante el uso normal de la aplicación y puede conocerse quién hizo la operación y en qué momento, resguardando los datos confidenciales del usuario | CU1 - CU2 |
+| Escalabilidad | Se agregan soporte para mayor cantidad de usuarios y distribuidores de forma satisfactoria y sin tener que realizar cambios en el CORE del sistema | CU11 |
+| Facilidad de integración | Se agregan nuevos modulos o funcionalidades, o se integran herramientas externas al sistema sin tener que realizar cambios en el CORE del mismo | Todos |
+
+ 
 
 # Restricciones 
 * Aplicación web accesible desde móviles y diferentes plataformas (Windows, Linux, OsX).
