@@ -45,13 +45,13 @@ Casos:
 # Atributos de calidad 
 | Id | Atributo | Escenario | Casos de uso relacionados |
 | ---- |-----------|-----------|------------------------|
-| QA-1 || Accesibilidad (movilidad accesible) | Un usuario accede a la aplicación desde cualquier dispositivo con conexión a internet  | Todos |
-| QA-2 || Disponibilidad | Ante una falla durante el normal funcionamiento del sistema, las operaciones se recuperan en menos de 60 segundos | Todos | 
-| QA-3 || Accuracy | Ante una actualizacion en el stock, informacion o distribuidores, los usuarios obtienen esta información en menos de 60 segundos | CU4 - CU5 - CU7 - CU8 - CU9 - CU11 |
-| QA-4 || Performance y Confiabilidad |Ante una disminución en el ancho de banda, todas las transacciones se pueden finalizar o abortar informando al usuario en cada caso. | CU1 - CU2 - CU3 |
-| QA-5 || Seguridad (en los pagos) | Un usuario realiza una transacción mediante el uso normal de la aplicación y puede conocerse quién hizo la operación y en qué momento, resguardando los datos confidenciales del usuario | CU1 - CU2 |
-| QA-6 || Escalabilidad | Se agregan soporte para mayor cantidad de usuarios y distribuidores de forma satisfactoria y sin tener que realizar cambios en el CORE del sistema | CU11 |
-| QA-7 || Facilidad de integración | Se agregan nuevos modulos o funcionalidades, o se integran herramientas externas al sistema sin tener que realizar cambios en el CORE del mismo | Todos |
+| QA-1 | Accesibilidad (movilidad accesible) | Un usuario accede a la aplicación desde cualquier dispositivo con conexión a internet  | Todos |
+| QA-2 | Disponibilidad | Ante una falla durante el normal funcionamiento del sistema, las operaciones se recuperan en menos de 60 segundos | Todos | 
+| QA-3 | Accuracy | Ante una actualizacion en el stock, informacion o distribuidores, los usuarios obtienen esta información en menos de 60 segundos | CU4 - CU5 - CU7 - CU8 - CU9 - CU11 |
+| QA-4 | Performance y Confiabilidad |Ante una disminución en el ancho de banda, todas las transacciones se pueden finalizar o abortar informando al usuario en cada caso. | CU1 - CU2 - CU3 |
+| QA-5 | Seguridad (en los pagos) | Un usuario realiza una transacción mediante el uso normal de la aplicación y puede conocerse quién hizo la operación y en qué momento, resguardando los datos confidenciales del usuario | CU1 - CU2 |
+| QA-6 | Escalabilidad | Se agregan soporte para mayor cantidad de usuarios y distribuidores de forma satisfactoria y sin tener que realizar cambios en el CORE del sistema | CU11 |
+| QA-7 | Facilidad de integración | Se agregan nuevos modulos o funcionalidades, o se integran herramientas externas al sistema sin tener que realizar cambios en el CORE del mismo | Todos |
 
  
 
@@ -61,7 +61,7 @@ Casos:
 * Debe soportarse un mínimo de 100 usuarios simultáneos.
 * La aplicación debe comunicarse con las API de heladeras, kioscos y métodos de pago.
 
-# Concerniente a la arquitectura
+# Aspectos concernientes a la arquitectura
 * Establecer una arquitectura inicial para la definicion general del sistema.
 
 # ADD<a name="id3"></a>
@@ -70,11 +70,15 @@ Casos:
 | Categoria | Detalles |
 | --------- | -------- |
 | Propósito de diseño | Sistema a desarrollar desde cero con dominio conocido. Desarrollo Agil con iteraciones cortas para obtener feedback continuamente. Un primer diseño arquitectural es necesario como guia para evitar el doble esfuerzo. |
-| Requerimientos funcionales primarios | De los casos de usos presentados los primarios son :  
-CU1: Comprar  
-CU2: Vender  
-CU5: Actualizar stock |
-| Escenarios de QA | Los escenarios de atributos de calidad descritos son priorizados de la siguiente forma:  
+| Requerimientos funcionales primarios | De los casos de usos presentados los primarios son :
+* CU1: Comprar
+* CU2: Vender
+* CU5: Actualizar stock |
+| Escenarios de QA | Los escenarios de atributos de calidad descritos son priorizados la tabla de prioridades. De estas, QA-1, QA-2, QA-3 y QA-5 se seleccionan como drivers |
+| Restricciones | Todas las limitaciones se consideran como drivers |
+| Aspectos concernientes a la arquitectura | Este aspecto se considera un driver |
+
+### Tabla de prioridades de QA:
 | ID Escenario | Importancia para el cliente | Dificultad de Implementación según el arquitecto |
 | ------ | ------ | -------|
 | QA-1 | Alta | Media |
@@ -84,3 +88,37 @@ CU5: Actualizar stock |
 | QA-5 | Alta | Media |
 | QA-6 | Media | Alta |
 | QA-7 | Media | Media |
+
+## *Iteración 1* 
+## Step 2: Establecer objetivo de iteración mediante la selección de drivers  
+Se toma como objetivo de esta iteración el aspecto concerniente a la arquitectura **establecer una arquitectura inicial**.
+Al tratarse de una definición general del sistema, el arquitecto deberá tener en mente todos los drivers, en particular:  
+* QA-1: accesibilidad,  
+* QA-2: disponibilidad,  
+* QA-3: accuracy,  
+* QA-5: seguridad,  
+* Aplicación web accesible desde móviles y diferentes plataformas (Windows, Linux, OsX),  
+* Los distribuidores y usuarios podrían tener bajo ancho de banda,  
+* Debe soportarse un mínimo de 100 usuarios simultáneos,  
+* La aplicación debe comunicarse con las API de heladeras, kioscos y métodos de pago,  
+* Establecer una arquitectura inicial para la definicion general del sistema.  
+
+## Step 3: Elegir uno o más elementos del sistema para refinar  
+Dado que es la primera iteración, el único elemento disponible a refinar es el sistema en su totalidad.  
+
+## Step4: Elegir conceptos de diseño que satisfagan los drivers seleccionados  
+| Decisiones de diseño y ubicación | Razón fundamental |
+| -------------------------------- | ----------------- |
+| Usar la arquitectura de referencia Rich Internet Application para la parte del cliente | La interfaz de usuario puede estar enriquecida pero ejecutarse dentro de un navegador, no necesita instalación en la maquina del usuario, lo que simplifica las actualizaciones y el mantenimiento,  y puede accederse desde cualquier dispositivo con un browser. |
+| Usar la arquitectura de referencia Service Application para la parte del servidor | La aplicación es usada por otros sistemas únicamente, no requiere interfaz |
+| Estructurar físicamente la aplicación utilizando el patrón de despliegue 2 tiers | Al ser una arquitectura cliente-servidor, usamos un nivel para cada uno. Además es una arquitectura conocida por las arquitectas |  
+
+**Alternativas descartadas**  
+| Alternativa | Razón |
+| ----------- | ----- |
+| Web Application | Descartada porque limita a una interfaz de usuario simple |
+| Rich Client Application | Da soporte a conectividad nula y el sistema requiere conexión constante |
+| Mobile Apllication | Cumple con los requisitos, pero limita el funcionamiento solo a dispositivos móviles |
+| Load-Balanced cluster pattern | Descartada porque el alcance inicial de la aplicación no justifica más de un servidor, pero puede ser considerada una opción a futuro debido al crecimiento de la misma|
+
+
