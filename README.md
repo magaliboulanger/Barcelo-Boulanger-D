@@ -76,8 +76,7 @@ Casos:
 | Categoria | Detalles |
 | --------- | -------- |
 | Propósito de diseño | Sistema a desarrollar desde cero con dominio conocido. Desarrollo Agil con iteraciones cortas para obtener feedback continuamente. Un primer diseño arquitectural es necesario como guia para evitar el doble esfuerzo. |
-| Requerimientos funcionales primarios | De los casos de usos presentados los primarios son :  **CU1:** Comprar
-**CU2:** Vender  **CU5:** Actualizar stock |
+| Requerimientos funcionales primarios | De los casos de usos presentados los primarios son :  **CU1:** Comprar  **CU2:** Vender  **CU5:** Actualizar stock |
 | Escenarios de QA | Los escenarios de atributos de calidad descritos son priorizados la tabla de prioridades. De estas, QA-1, QA-2, QA-3 y QA-5 se seleccionan como drivers |
 | Restricciones | Todas las limitaciones se consideran como drivers |
 | Aspectos concernientes a la arquitectura | Este aspecto se considera un driver |
