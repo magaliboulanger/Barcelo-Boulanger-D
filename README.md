@@ -26,7 +26,7 @@ Puesta en funcionamiento, se esperan 500 usuarios, 5 distribuidores, y en horari
 Usuarios:
 * Cliente
 * Distribuidor (actualmente heladeras y kioscos)
-* Cocina 
+* Cocina  
 Casos:
 1. Comprar: El usuario puede seleccionar uno o más productos de un local y reservarlos pagando mediante la conexión con algún sistema de pago. El usuario podría aplicar promociones en la compra.
 2. Vender : Un distribuidor selecciona uno o más productos a ser vendidos, registra la información del comprador y el monto de la venta. El stock de los productos vendidos es actualizado.
@@ -65,6 +65,12 @@ Casos:
 * Establecer una arquitectura inicial para la definicion general del sistema.
 
 # ADD<a name="id3"></a>
+
+1. [Step 1](#idS1)  
+2. [iteracion 1](#idI1)  
+3. [Step 2](#idS2)  
+4. [Step 3](#idS3)  
+5. [Step 4](#idS4)  
 
 ## Step 1: Review Inputs
 | Categoria | Detalles |
