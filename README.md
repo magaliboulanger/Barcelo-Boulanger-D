@@ -1,6 +1,11 @@
 # Trabajo Final Diseño de Sistemas de Software - Farmacy Food 
 
-# Suposiciones
+1. [Suposiciones](#id1)
+2. [Casos de uso](#id2)
+3. [ADD](#id3)
+
+
+# Suposiciones<a name="id1"></a>
 ## Registro de compras y pagos (Control de stock)
 Comunicación con 2 APIs (de heladeras y kiosco). Otra opción es el pago por la app (para ambas situaciones, heladera o kiosco). En ambos casos los sistemas deben interactuar en los dos sentidos.  
 ### Pago desde app
@@ -17,7 +22,7 @@ Comunicación con 2 APIs (de heladeras y kiosco). Otra opción es el pago por la
 Puesta en funcionamiento, se esperan 500 usuarios, 5 distribuidores, y en horarios pico 100 usuarios conectados simultáneamente. 
 (Instagram de farmacyfood 230 seguidores, tomado como base).
 
-# Casos de Uso
+# Casos de Uso<a name="id2"></a>
 Usuarios:
 * Cliente
 * Distribuidor (actualmente heladeras y kioscos)
@@ -38,15 +43,15 @@ Casos:
 ![Diagrama de Casos de Uso](/Images/DiagramaCasosDeUso.png "Diagrama de casos de uso")
 
 # Atributos de calidad 
-| Atributo | Escenario | Casos de uso relacionados |
-|-----------|-----------|------------------------|
-| Accesibilidad (movilidad accesible) | Un usuario accede a la aplicación desde cualquier dispositivo con conexión a internet  | Todos |
-| Disponibilidad | Ante una falla durante el normal funcionamiento del sistema, las operaciones se recuperan en menos de 60 segundos | Todos | 
-| Accuracy | Ante una actualizacion en el stock, informacion o distribuidores, los usuarios obtienen esta información en menos de 60 segundos | CU4 - CU5 - CU7 - CU8 - CU9 - CU11 |
-| Performance y Confiabilidad |Ante una disminución en el ancho de banda, todas las transacciones se pueden finalizar o abortar informando al usuario en cada caso. | CU1 - CU2 - CU3 |
-| Seguridad (en los pagos) | Un usuario realiza una transacción mediante el uso normal de la aplicación y puede conocerse quién hizo la operación y en qué momento, resguardando los datos confidenciales del usuario | CU1 - CU2 |
-| Escalabilidad | Se agregan soporte para mayor cantidad de usuarios y distribuidores de forma satisfactoria y sin tener que realizar cambios en el CORE del sistema | CU11 |
-| Facilidad de integración | Se agregan nuevos modulos o funcionalidades, o se integran herramientas externas al sistema sin tener que realizar cambios en el CORE del mismo | Todos |
+| Id | Atributo | Escenario | Casos de uso relacionados |
+| ---- |-----------|-----------|------------------------|
+| QA-1 || Accesibilidad (movilidad accesible) | Un usuario accede a la aplicación desde cualquier dispositivo con conexión a internet  | Todos |
+| QA-2 || Disponibilidad | Ante una falla durante el normal funcionamiento del sistema, las operaciones se recuperan en menos de 60 segundos | Todos | 
+| QA-3 || Accuracy | Ante una actualizacion en el stock, informacion o distribuidores, los usuarios obtienen esta información en menos de 60 segundos | CU4 - CU5 - CU7 - CU8 - CU9 - CU11 |
+| QA-4 || Performance y Confiabilidad |Ante una disminución en el ancho de banda, todas las transacciones se pueden finalizar o abortar informando al usuario en cada caso. | CU1 - CU2 - CU3 |
+| QA-5 || Seguridad (en los pagos) | Un usuario realiza una transacción mediante el uso normal de la aplicación y puede conocerse quién hizo la operación y en qué momento, resguardando los datos confidenciales del usuario | CU1 - CU2 |
+| QA-6 || Escalabilidad | Se agregan soporte para mayor cantidad de usuarios y distribuidores de forma satisfactoria y sin tener que realizar cambios en el CORE del sistema | CU11 |
+| QA-7 || Facilidad de integración | Se agregan nuevos modulos o funcionalidades, o se integran herramientas externas al sistema sin tener que realizar cambios en el CORE del mismo | Todos |
 
  
 
@@ -56,3 +61,26 @@ Casos:
 * Debe soportarse un mínimo de 100 usuarios simultáneos.
 * La aplicación debe comunicarse con las API de heladeras, kioscos y métodos de pago.
 
+# Concerniente a la arquitectura
+* Establecer una arquitectura inicial para la definicion general del sistema.
+
+# ADD<a name="id3"></a>
+
+## Step 1: Review Inputs
+| Categoria | Detalles |
+| --------- | -------- |
+| Propósito de diseño | Sistema a desarrollar desde cero con dominio conocido. Desarrollo Agil con iteraciones cortas para obtener feedback continuamente. Un primer diseño arquitectural es necesario como guia para evitar el doble esfuerzo. |
+| Requerimientos funcionales primarios | De los casos de usos presentados los primarios son :  
+CU1: Comprar  
+CU2: Vender  
+CU5: Actualizar stock |
+| Escenarios de QA | Los escenarios de atributos de calidad descritos son priorizados de la siguiente forma:  
+| ID Escenario | Importancia para el cliente | Dificultad de Implementación según el arquitecto |
+| ------ | ------ | -------|
+| QA-1 | Alta | Media |
+| QA-2 | Alta | Alta |
+| QA-3 | Alta | Media |
+| QA-4 | Media | Media |
+| QA-5 | Alta | Media |
+| QA-6 | Media | Alta |
+| QA-7 | Media | Media |
