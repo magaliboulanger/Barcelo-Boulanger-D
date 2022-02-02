@@ -72,7 +72,7 @@ Casos:
 4. [Step 3](#idS3)  
 5. [Step 4](#idS4)  
 
-## Step 1: Review Inputs
+## Step 1: Review Inputs<a name="idS1"></a>
 | Categoria | Detalles |
 | --------- | -------- |
 | Propósito de diseño | Sistema a desarrollar desde cero con dominio conocido. Desarrollo Agil con iteraciones cortas para obtener feedback continuamente. Un primer diseño arquitectural es necesario como guia para evitar el doble esfuerzo. |
@@ -95,8 +95,8 @@ Casos:
 | QA-6 | Media | Alta |
 | QA-7 | Media | Media |
 
-## *Iteración 1* 
-## Step 2: Establecer objetivo de iteración mediante la selección de drivers  
+## *Iteración 1* <a name="idI1"></a>
+## Step 2: Establecer objetivo de iteración mediante la selección de drivers<a name="idS2"></a>  
 Se toma como objetivo de esta iteración el aspecto concerniente a la arquitectura **establecer una arquitectura inicial**.
 Al tratarse de una definición general del sistema, el arquitecto deberá tener en mente todos los drivers, en particular:  
 * QA-1: accesibilidad,  
@@ -109,10 +109,10 @@ Al tratarse de una definición general del sistema, el arquitecto deberá tener 
 * La aplicación debe comunicarse con las API de heladeras, kioscos y métodos de pago,  
 * Establecer una arquitectura inicial para la definicion general del sistema.  
 
-## Step 3: Elegir uno o más elementos del sistema para refinar  
+## Step 3: Elegir uno o más elementos del sistema para refinar<a name="idS3"></a>  
 Dado que es la primera iteración, el único elemento disponible a refinar es el sistema en su totalidad.  
 
-## Step4: Elegir conceptos de diseño que satisfagan los drivers seleccionados  
+## Step4: Elegir conceptos de diseño que satisfagan los drivers seleccionados<a name="idS4"></a>  
 | Decisiones de diseño y ubicación | Razón fundamental |
 | -------------------------------- | ----------------- |
 | Usar la arquitectura de referencia Rich Internet Application para la parte del cliente | La interfaz de usuario puede estar enriquecida pero ejecutarse dentro de un navegador, no necesita instalación en la maquina del usuario, lo que simplifica las actualizaciones y el mantenimiento,  y puede accederse desde cualquier dispositivo con un browser. |
