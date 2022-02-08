@@ -133,12 +133,12 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 ## Step 6: Diagramas 
 ![Diagrama de Arquitectura Inicial](/Images/DiagramaInicial.png "Diagrama de arquitectura inicial.")
 | Elemento | Responsabilidad |
-| —---------- | —------------------- |
+| ---------- | ------------------- |
 | (WIP)| | 
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración 
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
-| —------------- | —----------------------- | —------------------------- | —-------------------------------------- |
+| ------------- | ----------------------- | ------------------------- | -------------------------------------- |
 | | | QA-1 | La arquitectura de referencia seleccionada contiene módulos que satisfacen este driver.|
 | | | QA-2 (Disponibilidad) | La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver. |
 | | | QA-3 (Accuracy)| La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver.  |
