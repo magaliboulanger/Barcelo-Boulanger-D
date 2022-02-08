@@ -109,19 +109,42 @@ Al tratarse de una definición general del sistema, el arquitecto deberá tener 
 ## Step 3: Elegir uno o más elementos del sistema para refinar<a name="idS3"></a>  
 Dado que es la primera iteración, el único elemento disponible a refinar es el sistema en su totalidad.  
 
-## Step4: Elegir conceptos de diseño que satisfagan los drivers seleccionados<a name="idS4"></a>  
+## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados<a name="idS4"></a>  
 | Decisiones de diseño y ubicación | Razón fundamental |
 | -------------------------------- | ----------------- |
-| Usar la arquitectura de referencia Rich Internet Application para la parte del cliente | La interfaz de usuario puede estar enriquecida pero ejecutarse dentro de un navegador, no necesita instalación en la maquina del usuario, lo que simplifica las actualizaciones y el mantenimiento,  y puede accederse desde cualquier dispositivo con un browser. |
+| Usar la arquitectura de referencia Web Application para la parte del cliente |La aplicación debe ser accesible mediante internet, no requiere una gran interfaz ni la instalación de ningún componente en la máquina del cliente y los recursos requeridos por parte del mismo son mínimos. |
 | Usar la arquitectura de referencia Service Application para la parte del servidor | La aplicación es usada por otros sistemas únicamente, no requiere interfaz |
-| Estructurar físicamente la aplicación utilizando el patrón de despliegue 2 tiers | Al ser una arquitectura cliente-servidor, usamos un nivel para cada uno. Además es una arquitectura conocida por las arquitectas |  
+| Estructurar físicamente la aplicación utilizando el patrón de despliegue 2 tiers | Al ser una arquitectura cliente-servidor, usamos un nivel para cada uno. Además es una arquitectura conocida por las arquitectas. |  
 
 **Alternativas descartadas**  
 | Alternativa | Razón |
 | ----------- | ----- |
-| Web Application | Descartada porque limita a una interfaz de usuario simple |
+| Rich Internet Application | Descartada por el uso de plugins que podrían no estar disponibles para todas las plataformas, lo que impactaría directamente en el driver QA-1. |
 | Rich Client Application | Da soporte a conectividad nula y el sistema requiere conexión constante |
 | Mobile Apllication | Cumple con los requisitos, pero limita el funcionamiento solo a dispositivos móviles |
 | Load-Balanced cluster pattern | Descartada porque el alcance inicial de la aplicación no justifica más de un servidor, pero puede ser considerada una opción a futuro debido al crecimiento de la misma|
 
+## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces 
+| Decisión de diseño y ubicación | Razón fundamental |
+| ----------------------------- | ------------------------ |  
+| Módulo de recuperación ante fallas (Gestión de fallos) | Necesario para satisfacer los drivers QA-2 y QA-3, es necesario considerarlo en esta instancia dado que debe ser transversal a todo el diseño. |
 
+
+## Step 6: Diagramas 
+![Diagrama de Arquitectura Inicial](/Images/DiagramaInicial.png "Diagrama de arquitectura inicial.")
+| Elemento | Responsabilidad |
+| —---------- | —------------------- |
+| (WIP)| | 
+
+## Step 7: Análisis y revisión de los objetivos de la iteración 
+| No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
+| —------------- | —----------------------- | —------------------------- | —-------------------------------------- |
+| | | QA-1 | La arquitectura de referencia seleccionada contiene módulos que satisfacen este driver.|
+| | | QA-2 (Disponibilidad) | La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver. |
+| | | QA-3 (Accuracy)| La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver.  |
+| | | QA-5(Seguridad) | La arquitectura de referencia seleccionada contiene módulos que satisfacen este driver. |
+| | | Restric 1 | La arquitectura de referencia seleccionada contiene módulos que satisfacen este driver. |
+| | | Restric 2  | La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver. | 
+| Restric 3 | | | No abordado aún. | 
+| | Restric 4 | | Parcialmente cubierto por el diseño elegido. | 
+| | | Restric 5 | Cubierto según el diseño presentado en el Diagrama de arquitectura inicial. | 
