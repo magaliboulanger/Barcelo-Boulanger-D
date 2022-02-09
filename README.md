@@ -67,14 +67,17 @@ Casos:
 # ADD<a name="id3"></a>
 
 1. [Step 1](#idS1)  
-2. [iteracion 1](#idI1)  
+2. [Iteracion 1](#idI1)  
     1. [Step 2](#idS2)  
     2. [Step 3](#idS3)  
     3. [Step 4](#idS4) 
     4. [Step 5](#idS5) 
     5. [Step 6](#idS6) 
     6. [Step 7](#idS7) 
-3. [iteracion 2](#idI2)  
+3. [Iteracion 2](#idI2)  
+    1. [Step 2](#idS22)  
+    2. [Step 3](#idS23)  
+    3. [Step 4](#idS24) 
 
 ## Step 1: Review Inputs<a name="idS1"></a>
 | Categoria | Detalles |
@@ -130,15 +133,25 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 
 ## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS5"></a>
 | Decisión de diseño y ubicación | Razón fundamental |
-| ----------------------------- | ------------------------ |  
-| Módulo de recuperación ante fallas (Gestión de fallos) | Necesario para satisfacer los drivers QA-2 y QA-3, es necesario considerarlo en esta instancia dado que debe ser transversal a todo el diseño. |
+| --------------------------------------- | ----------------------- |
+| Módulo de recuperación ante fallas (Gestión de fallos) | Necesario para satisfacer los drivers QA-2 y QA-3, es necesario considerarlo en esta instancia dado que debe ser transversal a todo el diseño ? |
+| El cliente se alojará en el Tier 1 | Responsable de la capa de presentación y persistencia de datos en caché. | 
+| El servidor se encuentra en el Tier 2 | Ejecutando la capa de negocio, datos y servicio responsable de la comunicación con servicios externos al sistema. |
 
 
 ## Step 6: Diagramas <a name="idS6"></a>
 ![Diagrama de Arquitectura Inicial](/Images/DiagramaInicial.png "Diagrama de arquitectura inicial.")
 | Elemento | Responsabilidad |
 | ---------- | ------------------- |
-| (WIP)| | 
+| Capa de presentación | Esta capa contiene módulos que controlan las interacciones del usuario. |
+| Capa de negocios | Esta capa contiene módulos encargados del control de las reglas del negocio. |
+| Entidades del negocio | Entidades que forman parte del modelo del dominio. |
+| Componentes del negocio | Estos componentes implementan operaciones del negocio. |
+| Capa de Datos | Esta capa es la encargada de la persistencia de los datos.|
+| Acceso a datos | Este componente es el encargado de la persistencia de los datos en una base de datos relacional, utilizará patrones para abstraer el comportamiento de modo que la base puede ser fácilmente extendida o reemplazada.  |
+| Componente transversal | Este componente contiene funcionalidad que atraviesa varias capas, como la seguridad, la recuperación de fallos y la comunicación. | 
+| Capa de servicios | Esta capa contiene módulos para exponer servicios utilizados por el cliente y también para la comunicación con servicios externos |
+| Cache | Conserva los últimos datos solicitados a la cada de datos del otro tier. |
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS7"></a>
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
@@ -156,3 +169,15 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 
 
 ## *Iteración 2* <a name="idI2"></a>
+## Step 2: Establecer objetivo de iteración mediante la selección de drivers <a name="idS22"></a>
+El objetivo de esta iteración es que la funcionalidad primaria previamente definida se encuentre soportada por la arquitectura. En esta segunda iteración los drivers seleccionados son:  
+* CU1: Comprar   
+* CU2: Vender  
+* CU5: Actualizar stock  
+## Step 3: Elegir uno o más elementos del sistema para refinar <a name="idS23"></a>
+Partiendo del diseño inicial, definido en la iteración anterior, los elementos a refinar seleccionados para esta iteración son los módulos ubicados en capas en el Servidor alojado en el Tier 2, el cual sigue las arquitecturas de referencia seleccionadas.  
+
+## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS24"></a>
+| Decisiones de diseño y ubicación | Razón fundamental |
+| -------------------------------- | ----------------- |
+| WIP | |
