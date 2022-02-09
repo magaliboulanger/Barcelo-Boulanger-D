@@ -68,9 +68,13 @@ Casos:
 
 1. [Step 1](#idS1)  
 2. [iteracion 1](#idI1)  
-3. [Step 2](#idS2)  
-4. [Step 3](#idS3)  
-5. [Step 4](#idS4)  
+    1. [Step 2](#idS2)  
+    2. [Step 3](#idS3)  
+    3. [Step 4](#idS4) 
+    4. [Step 5](#idS5) 
+    5. [Step 6](#idS6) 
+    6. [Step 7](#idS7) 
+3. [iteracion 2](#idI2)  
 
 ## Step 1: Review Inputs<a name="idS1"></a>
 | Categoria | Detalles |
@@ -124,19 +128,19 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 | Mobile Apllication | Cumple con los requisitos, pero limita el funcionamiento solo a dispositivos móviles |
 | Load-Balanced cluster pattern | Descartada porque el alcance inicial de la aplicación no justifica más de un servidor, pero puede ser considerada una opción a futuro debido al crecimiento de la misma|
 
-## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces 
+## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS5"></a>
 | Decisión de diseño y ubicación | Razón fundamental |
 | ----------------------------- | ------------------------ |  
 | Módulo de recuperación ante fallas (Gestión de fallos) | Necesario para satisfacer los drivers QA-2 y QA-3, es necesario considerarlo en esta instancia dado que debe ser transversal a todo el diseño. |
 
 
-## Step 6: Diagramas 
+## Step 6: Diagramas <a name="idS6"></a>
 ![Diagrama de Arquitectura Inicial](/Images/DiagramaInicial.png "Diagrama de arquitectura inicial.")
 | Elemento | Responsabilidad |
 | ---------- | ------------------- |
 | (WIP)| | 
 
-## Step 7: Análisis y revisión de los objetivos de la iteración 
+## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS7"></a>
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
 | ------------- | ----------------------- | ------------------------- | -------------------------------------- |
 | | | QA-1 | La arquitectura de referencia seleccionada contiene módulos que satisfacen este driver.|
@@ -148,3 +152,7 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 | Restric 3 | | | No abordado aún. | 
 | | Restric 4 | | Parcialmente cubierto por el diseño elegido. | 
 | | | Restric 5 | Cubierto según el diseño presentado en el Diagrama de arquitectura inicial. | 
+
+
+
+## *Iteración 2* <a name="idI2"></a>
