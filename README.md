@@ -137,6 +137,8 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 | Módulo de recuperación ante fallas (Gestión de fallos) | Necesario para satisfacer los drivers QA-2 y QA-3, es necesario considerarlo en esta instancia dado que debe ser transversal a todo el diseño ? |
 | El cliente se alojará en el Tier 1 | Responsable de la capa de presentación y persistencia de datos en caché. | 
 | El servidor se encuentra en el Tier 2 | Ejecutando la capa de negocio, datos y servicio responsable de la comunicación con servicios externos al sistema. |
+| Utilizar el lenguaje de programación Java para el desarrollo | Las alternativas consideradas fueron: Java, PHP, Python. El equipo posee conocimiento en las tres alternativas pero consideran para esta ocasión Java dado que es el lenguaje sobre el que mayor dominio poseen. |
+
 
 
 ## Step 6: Diagramas <a name="idS6"></a>
@@ -152,6 +154,17 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 | Componente transversal | Este componente contiene funcionalidad que atraviesa varias capas, como la seguridad, la recuperación de fallos y la comunicación. | 
 | Capa de servicios | Esta capa contiene módulos para exponer servicios utilizados por el cliente y también para la comunicación con servicios externos |
 | Cache | Conserva los últimos datos solicitados a la capa de datos del otro tier. |
+![Diagrama de Deployment Inicial](/Images/DiagramaDeploymentInicial.jpeg "Diagrama de deployment inicial.")
+| Elemento | Responsabilidad |
+| ---------- | ------------------- |
+| Client Server | Servidor donde reside la capa de presentación del sistema. |
+| Application Server | Servidor que aloja la lógica del negocio, las conexiones con bases de datos y sistemas externos. |
+
+| Relación | Descripción |
+| ---------- | ------------------- |
+| Entre Database y Application Server | La conexión se realizará mediante el API JDBC.|
+| Entre Client Server y Application Server | La comunicación entre ambos se realizará mediante el protocolo HTTPS. |
+| Entre Client Server y Browser | La comunicación entre ambos se realizará mediante el protocolo HTTPS. | 
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS7"></a>
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
@@ -180,4 +193,7 @@ Partiendo del diseño inicial, definido en la iteración anterior, los elementos
 ## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS24"></a>
 | Decisiones de diseño y ubicación | Razón fundamental |
 | -------------------------------- | ----------------- |
-| WIP | |
+| Creación del Modelo de Dominio. | Es necesario para poder realizar una descomposición funcional conocer el modelo de dominio del sistema con sus entidades más grandes y sus relaciones. |
+| Identificar objetos del modelo y alojar funcionalidades. | Encapsular elementos funcionales en bloques para asegurarse de considerar todos los requerimientos. | 
+| Usar Data Access Object (DAO) para el acceso a la base de datos. | DAO Sera utilizado para separar la capa de persistencia del resto de las funcionalidades, proveyendo un acceso seguro a los datos. Fue elegida porque las arquitectas tienen conocimiento de este patrón y consideran que se adapta a los requerimientos. |  
+| Elegir el framework Spring para el desarrollo web. | Se seleccionó este framework dado que es ampliamente utilizado para el lenguaje elegido y, por otro lado, la utilización de un framework facilitará el desarrollo, dado que en general la programación es más rápida y se automatizan las tareas. |
