@@ -151,19 +151,19 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 | Acceso a datos | Este componente es el encargado de la persistencia de los datos en una base de datos relacional, utilizará patrones para abstraer el comportamiento de modo que la base puede ser fácilmente extendida o reemplazada.  |
 | Componente transversal | Este componente contiene funcionalidad que atraviesa varias capas, como la seguridad, la recuperación de fallos y la comunicación. | 
 | Capa de servicios | Esta capa contiene módulos para exponer servicios utilizados por el cliente y también para la comunicación con servicios externos |
-| Cache | Conserva los últimos datos solicitados a la cada de datos del otro tier. |
+| Cache | Conserva los últimos datos solicitados a la capa de datos del otro tier. |
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS7"></a>
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
 | ------------- | ----------------------- | ------------------------- | -------------------------------------- |
-| | | QA-1 | La arquitectura de referencia seleccionada contiene módulos que satisfacen este driver.|
+| | | QA-1 (Accesibilidad) | La arquitectura de referencia seleccionada (Web Application) asegura la accesibilidad desde cualquier dispositivo con un browser. |
 | | | QA-2 (Disponibilidad) | La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver. |
 | | | QA-3 (Accuracy)| La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver.  |
-| | | QA-5(Seguridad) | La arquitectura de referencia seleccionada contiene módulos que satisfacen este driver. |
-| | | Restric 1 | La arquitectura de referencia seleccionada contiene módulos que satisfacen este driver. |
+| | | QA-5 (Seguridad) | La arquitectura de referencia seleccionada contiene módulos (dentro del módulo transversal) que satisfacen este driver. |
+| | | Restric 1 | La arquitectura de referencia, al ser una aplicación web, satisface este driver. |
 | | | Restric 2  | La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver. | 
 | Restric 3 | | | No abordado aún. | 
-| | Restric 4 | | Parcialmente cubierto por el diseño elegido. | 
+| | Restric 4 | | Parcialmente cubierto por el diseño elegido. Existen módulos encargados de la comunicación con servicios externos que aún deben ser refinados. | 
 | | | Restric 5 | Cubierto según el diseño presentado en el Diagrama de arquitectura inicial. | 
 
 
