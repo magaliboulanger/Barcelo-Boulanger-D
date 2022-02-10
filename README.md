@@ -154,7 +154,11 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 | Componente transversal | Este componente contiene funcionalidad que atraviesa varias capas, como la seguridad, la recuperación de fallos y la comunicación. | 
 | Capa de servicios | Esta capa contiene módulos para exponer servicios utilizados por el cliente y también para la comunicación con servicios externos |
 | Cache | Conserva los últimos datos solicitados a la capa de datos del otro tier. |
+   
+
 ![Diagrama de Deployment Inicial](/Images/DiagramaDeploymentInicial.jpeg "Diagrama de deployment inicial.")
+
+  
 | Elemento | Responsabilidad |
 | ---------- | ------------------- |
 | Client Server | Servidor donde reside la capa de presentación del sistema. |
