@@ -78,6 +78,9 @@ Casos:
     1. [Step 2](#idS22)  
     2. [Step 3](#idS23)  
     3. [Step 4](#idS24) 
+    4. [Step 5](#idS25)  
+    5. [Step 6](#idS26)  
+    6. [Step 7](#idS27) 
 
 ## Step 1: Review Inputs<a name="idS1"></a>
 | Categoria | Detalles |
@@ -142,6 +145,7 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 
 
 ## Step 6: Diagramas <a name="idS6"></a>
+**Diagrama de Arquitectura Inicial** 
 ![Diagrama de Arquitectura Inicial](/Images/DiagramaInicial.png "Diagrama de arquitectura inicial.")
 | Elemento | Responsabilidad |
 | ---------- | ------------------- |
@@ -155,7 +159,7 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 | Capa de servicios | Esta capa contiene módulos para exponer servicios utilizados por el cliente y también para la comunicación con servicios externos |
 | Cache | Conserva los últimos datos solicitados a la capa de datos del otro tier. |
    
-
+**Diagrama de Deployment** 
 ![Diagrama de Deployment Inicial](/Images/DiagramaDeploymentInicial.jpeg "Diagrama de deployment inicial.")
 
   
@@ -201,3 +205,20 @@ Partiendo del diseño inicial, definido en la iteración anterior, los elementos
 | Identificar objetos del modelo y alojar funcionalidades. | Encapsular elementos funcionales en bloques para asegurarse de considerar todos los requerimientos. | 
 | Usar Data Access Object (DAO) para el acceso a la base de datos. | DAO Sera utilizado para separar la capa de persistencia del resto de las funcionalidades, proveyendo un acceso seguro a los datos. Fue elegida porque las arquitectas tienen conocimiento de este patrón y consideran que se adapta a los requerimientos. |  
 | Elegir el framework Spring para el desarrollo web. | Se seleccionó este framework dado que es ampliamente utilizado para el lenguaje elegido y, por otro lado, la utilización de un framework facilitará el desarrollo, dado que en general la programación es más rápida y se automatizan las tareas. |
+
+## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS25"></a>
+| Decisión de diseño y ubicación | Razón fundamental |
+| --------------------------------------- | ----------------------- |
+
+
+
+## Step 6: Diagramas <a name="idS26"></a>
+
+**Diagrama del modelo inicial (WIP)**
+
+![Diagrama del Modelo Inicial](/Images/ModeloInicial.png "Diagrama del modelo inicial.")
+
+
+## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS27"></a>
+| No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
+| ------------- | ----------------------- | ------------------------- | -------------------------------------- |
