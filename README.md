@@ -203,20 +203,27 @@ Partiendo del diseño inicial, definido en la iteración anterior, los elementos
 | -------------------------------- | ----------------- |
 | Creación del Modelo de Dominio. | Es necesario para poder realizar una descomposición funcional conocer el modelo de dominio del sistema con sus entidades más grandes y sus relaciones. |
 | Identificar objetos del modelo y alojar funcionalidades. | Encapsular elementos funcionales en bloques para asegurarse de considerar todos los requerimientos. | 
+| Descomponer los objetos del dominio en componentes o modulos. | La funcionalidad de los objetos del dominio puede estar relacionada con diferentes capas y por lo tanto "pertenecer" o asociarse con los elementos dentro de las capas. |
 | Usar Data Access Object (DAO) para el acceso a la base de datos. | DAO Sera utilizado para separar la capa de persistencia del resto de las funcionalidades, proveyendo un acceso seguro a los datos. Fue elegida porque las arquitectas tienen conocimiento de este patrón y consideran que se adapta a los requerimientos. |  
 | Elegir el framework Spring para el desarrollo web. | Se seleccionó este framework dado que es ampliamente utilizado para el lenguaje elegido y, por otro lado, la utilización de un framework facilitará el desarrollo, dado que en general la programación es más rápida y se automatizan las tareas. |
 
 ## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS25"></a>
 | Decisión de diseño y ubicación | Razón fundamental |
 | --------------------------------------- | ----------------------- |
-
-
+| Creación un modelo inicial. | Si bien el modelo podría crecer a medida que se implemente y a medida que el sistema tambien crece, se decide plantear unicamente un modelo inicial, con las entidades consideradas claves y asociando las responsabilidades necesarias para satisfacer los casos de uso considerados en esta iteración (Las responsabilidades de cada entidad pueden verse en los diagramas del paso siguiente). |  
+| Descomposición de los objetos en módulos ubicados en diferentes capas. | En esta instancia, se asegura la identificación de módulos necesarios para los casos de uso principales considerados como drivers en esta iteración. A su vez se deberán crear pruebas unitarias para dichos módulos, esto quedará registrado como un nuevo aspecto conserniente a la arquitectura (ArqCon2). |
+| Conexión con la base de datos. | En la capa de datos, existirán los módulos necesarios para la implementación del patron DAO para el acceso a los datos. | 
 
 ## Step 6: Diagramas <a name="idS26"></a>
 
 **Diagrama del modelo inicial (WIP)**
 
 ![Diagrama del Modelo Inicial](/Images/ModeloInicial.png "Diagrama del modelo inicial.")
+
+
+
+| Elemento | Responsabilidad |
+| ---------- | ------------------- |
 
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS27"></a>
