@@ -216,15 +216,28 @@ Partiendo del diseño inicial, definido en la iteración anterior, los elementos
 
 ## Step 6: Diagramas <a name="idS26"></a>
 
-**Diagrama del modelo inicial (WIP)**
+**Diagrama del modelo inicial**
 
 ![Diagrama del Modelo Inicial](/Images/ModeloInicial.png "Diagrama del modelo inicial.")
 
-
-
+**Diagrama del módulos inicial**
+![Diagrama del Módulos Inicial](/Images/ModulosInicialesFuncionalidadPrimaria.png "Diagrama del módulos inicial.")
+Esta imagen muestra los módulos iniciales requeridos para soportar la funcionalidad primaria, ubicados en sus respectivas capas.
+A continuación se detallan las responsabilidades de cada uno de ellos:
 | Elemento | Responsabilidad |
 | ---------- | ------------------- |
+| TransaccionView | Muestra el estado de la compra o venta (tanto para el cliente como para el distribuidor respectivamente) y se actualiza en función del resultado (Pago aceptado-rechazado) informando al usuario. Este componente puede contener dentro más de un elemento perteneciente a la UI que resulten necesarios. |
+| RequestManager | Encargado de comunicarse con el servidor. |
+| RequestService | Componente que recibe los request de parte del cliente. |
+| ConectorServExternos | Componente que maneja las solicitudes a los servicios externos requeridos como es el caso de los métodos de pago. |
+| TransaccionController | Contiene la lógica del negocio necesaria para llevar a cabo una transacción, la misma puede ser tanto una compra ocmo una venta según el diseño presentado en el diagrama anterior. |
+| Entidades del dominio | Contiene todas las entidades del dominio descriptas en el diagrama anterior.|
+| Módulos DAO | Conexión con la base de datos siguiendo el patrón DAO para las operaciones CRUD. |
 
+
+**Diagramas de secuencia de los casos de uso primarios (WIP)**
+
+(Añadir)
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS27"></a>
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
