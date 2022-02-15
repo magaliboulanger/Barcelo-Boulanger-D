@@ -221,7 +221,7 @@ Partiendo del diseño inicial, definido en la iteración anterior, los elementos
 ![Diagrama del Modelo Inicial](/Images/ModeloInicial.png "Diagrama del modelo inicial.")
 
 **Diagrama del módulos inicial**
-![Diagrama del Módulos Inicial](/Images/ModulosInicialesFuncionalidadPrimaria.png "Diagrama del módulos inicial.")
+![Diagrama del Módulos Inicial](/Images/ModulosInicialesFuncionalidadPrimaria.png "Diagrama del módulos inicial.")  
 Esta imagen muestra los módulos iniciales requeridos para soportar la funcionalidad primaria, ubicados en sus respectivas capas.
 A continuación se detallan las responsabilidades de cada uno de ellos:
 | Elemento | Responsabilidad |
@@ -235,10 +235,26 @@ A continuación se detallan las responsabilidades de cada uno de ellos:
 | Módulos DAO | Conexión con la base de datos siguiendo el patrón DAO para las operaciones CRUD. |
 
 
-**Diagramas de secuencia de los casos de uso primarios (WIP)**
+**Diagramas de secuencia de los casos de uso primarios**
+![Diagrama de Secuencia](/Images/DiagramaSecuencia.png "Diagrama de Secuencia.") 
+El diagrama de secuencia muestra el flujo para los tres casos de uso identificados como principales. 
+El flujo de una compra como el de una venta a partir de que la misma se confirma es igual, la variación se da anteriormente donde es el Comprador quien añade los productos al carrito o el Distribuidor quien crea el mismo carro, tambien se ve en este diagrama reflejada la actualización de stock (cuando se realiza la actualizacion del distibuidor) luego de una compra o venta. Para el caso de la actualizacion de stock existe otro escenario que lo provoca y es cuando un distribuidor recibe nuevo stock.
+Las actualizaciones a la persistencia se dan en caso de que la operación de pago haya sido exitosa (Actualizar diagrama).  
+  
+En el diagrama se pueden ver los métodos iniciales que surgen para los casos de uso primarios, se describen en la siguiente tabla:
 
-(Añadir)
+| Elemento | Método | Descripción | 
+| -------- | ------ | ----------- | 
+| RequestService | Response sendRequest(Request) | Recibe el request con los datos de la transacción que se desea llevar a cabo.  |
+| TransaccionController | comprar() | Genera una nueva transacción con los datos recibidos. |
+| ConectorServExternos | pagar() | Conexion con serviciones externos que se comunica con el gestor de pagos y retorna el estado de | UsuarioDAO | updateUsuarioDAO() | Actualiza la informacion del Usuario en la persistencia, en este caso particular actualiza su lista de compras. | 
+| DistribuidorDAO | updateDistribuidorDAO() | Actualiza la informacion del Distribuidor en la persistencia, en este caso particular actualiza su lista de ventas y su stock disponible. |
+| TransaccionDAO | addTransaccionDAO() | Registra la ultima operación efectuada. |
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS27"></a>
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
-| ------------- | ----------------------- | ------------------------- | -------------------------------------- |
+| ----------- | --------------------- | ---------------------- | ------------------------------------------------- |
+| | CU1 - Comprar || Se encuentra parcialemnte abordado dado que la conexión con el servicio externo de pagos no esta completamente definida. |
+| | CU2 - Vender ||Se encuentra parcialemnte abordado dado que la conexión con el servicio externo de pagos no esta completamente definida. |
+| | | CU3 - Actualizar Stock | Se considera completamente abordado con la interfaz de CRUD de la base de datos. |
+
