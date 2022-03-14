@@ -46,12 +46,13 @@ Casos:
 | Id | Atributo | Escenario | Casos de uso relacionados |
 | ---- |-----------|-----------|------------------------|
 | QA-1 | Accesibilidad (movilidad accesible) | Un usuario accede a la aplicación desde cualquier dispositivo con conexión a internet  | Todos |
-| QA-2 | Disponibilidad | Ante una falla durante el normal funcionamiento del sistema, las operaciones se recuperan en menos de 60 segundos | Todos | 
-| QA-3 | Accuracy | Ante una actualizacion en el stock, informacion o distribuidores, los usuarios obtienen esta información en menos de 60 segundos | CU4 - CU5 - CU7 - CU8 - CU9 - CU11 |
-| QA-4 | Performance y Confiabilidad |Ante una disminución en el ancho de banda, todas las transacciones se pueden finalizar o abortar informando al usuario en cada caso. | CU1 - CU2 - CU3 |
-| QA-5 | Seguridad (en los pagos) | Un usuario realiza una transacción mediante el uso normal de la aplicación y puede conocerse quién hizo la operación y en qué momento, resguardando los datos confidenciales del usuario | CU1 - CU2 |
+| QA-2 | Disponibilidad | Ante una falla durante el normal funcionamiento del sistema, el sistema hace un rollback regresando al estado inicial. | Todos | 
+| QA-3 | Accuracy | Ante una actualizacion en el stock, informacion o distribuidores, los usuarios obtienen la información correcta. | CU4 - CU5 - CU7 - CU8 - CU9 - CU11 |
+| QA-4 | Confiabilidad | Ante una disminución en el ancho de banda, todas las transacciones se pueden finalizar o abortar informando al usuario en cada caso. | CU1 - CU2 - CU3 |
+| QA-5 | Seguridad (en los pagos) | Un usuario realiza una transacción mediante el uso normal de la aplicación y puede conocerse quién hizo la operación y en qué momento, resguardando los datos confidenciales del usuario. En caso de ataques, los datos originales se restaurarán en un plazo máximo de 1 día. | CU1 - CU2 |
 | QA-6 | Escalabilidad | Se agregan soporte para mayor cantidad de usuarios y distribuidores de forma satisfactoria y sin tener que realizar cambios en el CORE del sistema | CU11 |
 | QA-7 | Facilidad de integración | Se agregan nuevos modulos o funcionalidades, o se integran herramientas externas al sistema sin tener que realizar cambios en el CORE del mismo | Todos |
+| QA-8 | Performance | En condiciones normales de operacion el sistema deberá procesar las transacciones con una latencia promedio de 5 segundos. | Todos |
 
  
 
@@ -81,15 +82,22 @@ Casos:
     4. [Step 5](#idS25)  
     5. [Step 6](#idS26)  
     6. [Step 7](#idS27) 
+4. [Iteracion 3](#idI3)  
+    1. [Step 2](#idS32)  
+    2. [Step 3](#idS33)  
+    3. [Step 4](#idS34) 
+    4. [Step 5](#idS35)  
+    5. [Step 6](#idS36)  
+    6. [Step 7](#idS37)
 
 ## Step 1: Review Inputs<a name="idS1"></a>
 | Categoria | Detalles |
 | --------- | -------- |
 | Propósito de diseño | Sistema a desarrollar desde cero con dominio conocido. Desarrollo Agil con iteraciones cortas para obtener feedback continuamente. Un primer diseño arquitectural es necesario como guia para evitar el doble esfuerzo. |
 | Requerimientos funcionales primarios | De los casos de usos presentados los primarios son :  **CU1:** Comprar; **CU2:** Vender; **CU5:** Actualizar stock |
-| Escenarios de QA | Los escenarios de atributos de calidad descritos son priorizados la tabla de prioridades. De estas, QA-1, QA-2, QA-3 y QA-5 se seleccionan como drivers |
-| Restricciones | Todas las limitaciones se consideran como drivers |
-| Aspectos concernientes a la arquitectura | Este aspecto se considera un driver |
+| Escenarios de QA | Los escenarios de atributos de calidad descritos son priorizados la tabla de prioridades. De estas, QA-1, QA-2, QA-3, QA-5 y QA-8 se seleccionan como drivers. |
+| Restricciones | Todas las limitaciones se consideran como drivers. |
+| Aspectos concernientes a la arquitectura | Este aspecto se considera un driver. |
 
 ### Tabla de prioridades de QA:
 | ID Escenario | Importancia para el cliente | Dificultad de Implementación según el arquitecto |
@@ -110,6 +118,7 @@ Al tratarse de una definición general del sistema, el arquitecto deberá tener 
 * QA-2: disponibilidad,  
 * QA-3: accuracy,  
 * QA-5: seguridad,  
+* QA-8: performance,
 * Aplicación web accesible desde móviles y diferentes plataformas (Windows, Linux, OsX),  
 * Los distribuidores y usuarios podrían tener bajo ancho de banda,  
 * Debe soportarse un mínimo de 100 usuarios simultáneos,  
@@ -136,8 +145,7 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 
 ## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS5"></a>
 | Decisión de diseño y ubicación | Razón fundamental |
-| --------------------------------------- | ----------------------- |
-| Módulo de recuperación ante fallas (Gestión de fallos) | Necesario para satisfacer los drivers QA-2 y QA-3, es necesario considerarlo en esta instancia dado que debe ser transversal a todo el diseño ? |
+| ------------------------------ | ----------------- |
 | El cliente se alojará en el Tier 1 | Responsable de la capa de presentación y persistencia de datos en caché. | 
 | El servidor se encuentra en el Tier 2 | Ejecutando la capa de negocio, datos y servicio responsable de la comunicación con servicios externos al sistema. |
 | Utilizar el lenguaje de programación Java para el desarrollo | Las alternativas consideradas fueron: Java, PHP, Python. El equipo posee conocimiento en las tres alternativas pero consideran para esta ocasión Java dado que es el lenguaje sobre el que mayor dominio poseen. |
@@ -178,9 +186,10 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
 | ------------- | ----------------------- | ------------------------- | -------------------------------------- |
 | | | QA-1 (Accesibilidad) | La arquitectura de referencia seleccionada (Web Application) asegura la accesibilidad desde cualquier dispositivo con un browser. |
-| | | QA-2 (Disponibilidad) | La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver. |
-| | | QA-3 (Accuracy)| La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver.  |
-| | | QA-5 (Seguridad) | La arquitectura de referencia seleccionada contiene módulos (dentro del módulo transversal) que satisfacen este driver. |
+| QA-2 (Disponibilidad) | | | No abordado. |
+| QA-3 (Accuracy) | | | No abordado.  |
+| | QA-5 (Seguridad) | | La arquitectura de referencia seleccionada contiene módulos (dentro del módulo transversal) que satisfacen este driver pero auún resta detallarlos más. |
+| QA-8 (Performance) | | | No abordado. |
 | | | Restric 1 | La arquitectura de referencia, al ser una aplicación web, satisface este driver. |
 | | | Restric 2  | La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver. | 
 | Restric 3 | | | No abordado aún. | 
@@ -212,7 +221,7 @@ Partiendo del diseño inicial, definido en la iteración anterior, los elementos
 | --------------------------------------- | ----------------------- |
 | Creación un modelo inicial. | Si bien el modelo podría crecer a medida que se implemente y a medida que el sistema tambien crece, se decide plantear unicamente un modelo inicial, con las entidades consideradas claves y asociando las responsabilidades necesarias para satisfacer los casos de uso considerados en esta iteración (Las responsabilidades de cada entidad pueden verse en los diagramas del paso siguiente). |  
 | Descomposición de los objetos en módulos ubicados en diferentes capas. | En esta instancia, se asegura la identificación de módulos necesarios para los casos de uso principales considerados como drivers en esta iteración. A su vez se deberán crear pruebas unitarias para dichos módulos, esto quedará registrado como un nuevo aspecto conserniente a la arquitectura (ArqCon2). |
-| Conexión con la base de datos. | En la capa de datos, existirán los módulos necesarios para la implementación del patron DAO para el acceso a los datos. | 
+| Conexión con la base de datos. | En la capa de datos, existirán los módulos necesarios para la implementación del patron DAO para el acceso a los datos. La base de datos se encuentra en la nube y se decide utilizar los servicios de Oracle. | 
 
 ## Step 6: Diagramas <a name="idS26"></a>
 
@@ -255,6 +264,15 @@ En el diagrama se pueden ver los métodos iniciales que surgen para los casos de
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
 | ----------- | --------------------- | ---------------------- | ------------------------------------------------- |
 | | CU1 - Comprar || Se encuentra parcialemnte abordado dado que la conexión con el servicio externo de pagos no esta completamente definida. |
-| | CU2 - Vender ||Se encuentra parcialemnte abordado dado que la conexión con el servicio externo de pagos no esta completamente definida. |
+| | CU2 - Vender || Se encuentra parcialemnte abordado dado que la conexión con el servicio externo de pagos no esta completamente definida. |
 | | | CU3 - Actualizar Stock | Se considera completamente abordado con la interfaz de CRUD de la base de datos. |
 
+## *Iteración 3* <a name="idI3"></a>
+## Step 2: Establecer objetivo de iteración mediante la selección de drivers<a name="idS32"></a>  
+
+## Step 3: Elegir uno o más elementos del sistema para refinar <a name="idS33"></a>
+## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS34"></a>
+## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS35"></a>
+## Step 6: Diagramas <a name="idS66"></a>
+
+## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS37"></a>
