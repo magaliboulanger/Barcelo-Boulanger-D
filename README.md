@@ -89,26 +89,34 @@ Casos:
     4. [Step 5](#idS35)  
     5. [Step 6](#idS36)  
     6. [Step 7](#idS37)
+5. [Iteracion 4](#idI4)  
+    1. [Step 2](#idS42)  
+    2. [Step 3](#idS43)  
+    3. [Step 4](#idS44) 
+    4. [Step 5](#idS45)  
+    5. [Step 6](#idS46)  
+    6. [Step 7](#idS47)
 
 ## Step 1: Review Inputs<a name="idS1"></a>
 | Categoria | Detalles |
 | --------- | -------- |
 | Propósito de diseño | Sistema a desarrollar desde cero con dominio conocido. Desarrollo Agil con iteraciones cortas para obtener feedback continuamente. Un primer diseño arquitectural es necesario como guia para evitar el doble esfuerzo. |
 | Requerimientos funcionales primarios | De los casos de usos presentados los primarios son :  **CU1:** Comprar; **CU2:** Vender; **CU5:** Actualizar stock |
-| Escenarios de QA | Los escenarios de atributos de calidad descritos son priorizados la tabla de prioridades. De estas, QA-1, QA-2, QA-3, QA-5 y QA-8 se seleccionan como drivers. |
+| Escenarios de QA | Los escenarios de atributos de calidad descritos son priorizados la tabla de prioridades. De estas, QA-1, QA-2, QA-3, QA-5, QA-6 y QA-8 se seleccionan como drivers. |
 | Restricciones | Todas las limitaciones se consideran como drivers. |
 | Aspectos concernientes a la arquitectura | Este aspecto se considera un driver. |
 
 ### Tabla de prioridades de QA:
 | ID Escenario | Importancia para el cliente | Dificultad de Implementación según el arquitecto |
 | ------ | ------ | -------|
-| QA-1 | Alta | Media |
-| QA-2 | Alta | Alta |
-| QA-3 | Alta | Media |
-| QA-4 | Media | Media |
-| QA-5 | Alta | Media |
-| QA-6 | Media | Alta |
-| QA-7 | Media | Media |
+| QA-1 (Accesibilidad) | Alta | Media |
+| QA-2 (Disponibilidad) | Alta | Alta |
+| QA-3 (Accuracy) | Alta | Media |
+| QA-4 (Confiabilidad)| Media | Media |
+| QA-5 (Seguridad) | Alta | Media |
+| QA-6 (Escalabilidad) | Media | Alta |
+| QA-7 (Facilidad de integración) | Media | Media |
+| QA-8 (Performance) | Alta | Media |
 
 ## *Iteración 1* <a name="idI1"></a>
 ## Step 2: Establecer objetivo de iteración mediante la selección de drivers<a name="idS2"></a>  
@@ -118,6 +126,7 @@ Al tratarse de una definición general del sistema, el arquitecto deberá tener 
 * QA-2: disponibilidad,  
 * QA-3: accuracy,  
 * QA-5: seguridad,  
+* QA-6: escalabilidad
 * QA-8: performance,
 * Aplicación web accesible desde móviles y diferentes plataformas (Windows, Linux, OsX),  
 * Los distribuidores y usuarios podrían tener bajo ancho de banda,  
@@ -179,8 +188,10 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 | Relación | Descripción |
 | ---------- | ------------------- |
 | Entre Database y Application Server | La conexión se realizará mediante el API JDBC.|
-| Entre Client Server y Application Server | La comunicación entre ambos se realizará mediante el protocolo HTTPS. |
+| Entre Client Server y Application Server | La comunicación entre ambos se realizará mediante el protocolo HTTPS. Servidor RESTful. |
 | Entre Client Server y Browser | La comunicación entre ambos se realizará mediante el protocolo HTTPS. | 
+
+Se descarta la comunicación mediante Web Sockets dado que, si bien podría implementarse y la comunicación sería más rápida, por un lado no se requiere comunicación bidireccional y por otro se desfavorecería al QA-6 (escalabilidad). Dado que mediante Web Sockets podríamos escalar de manera vertical unicamente mientras que mediante una RESTful API podríamos de manera horizontal, que es lo deseado.
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS7"></a>
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
@@ -188,11 +199,12 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 | | | QA-1 (Accesibilidad) | La arquitectura de referencia seleccionada (Web Application) asegura la accesibilidad desde cualquier dispositivo con un browser. |
 | QA-2 (Disponibilidad) | | | No abordado. |
 | QA-3 (Accuracy) | | | No abordado.  |
-| | QA-5 (Seguridad) | | La arquitectura de referencia seleccionada contiene módulos (dentro del módulo transversal) que satisfacen este driver pero auún resta detallarlos más. |
+| | QA-5 (Seguridad) | | La arquitectura de referencia seleccionada contiene módulos (dentro del módulo transversal) que satisfacen este driver pero aún resta detallarlos. |
+| | | QA-6 (Escalabilidad) | Completamente abordado debido a la elección de un Servidor RESTful.|
 | QA-8 (Performance) | | | No abordado. |
 | | | Restric 1 | La arquitectura de referencia, al ser una aplicación web, satisface este driver. |
-| | | Restric 2  | La creación de un módulo transversal especializado en recuperación ante fallos satisface este driver. | 
-| Restric 3 | | | No abordado aún. | 
+| Restric 2 | |  | No abordado. | 
+| | | Restric 3 | Considerado completo dado que el servidor REST tiene capacidad para el número inicial de usuarios. | 
 | | Restric 4 | | Parcialmente cubierto por el diseño elegido. Existen módulos encargados de la comunicación con servicios externos que aún deben ser refinados. | 
 | | | Restric 5 | Cubierto según el diseño presentado en el Diagrama de arquitectura inicial. | 
 
@@ -219,7 +231,7 @@ Partiendo del diseño inicial, definido en la iteración anterior, los elementos
 ## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS25"></a>
 | Decisión de diseño y ubicación | Razón fundamental |
 | --------------------------------------- | ----------------------- |
-| Creación un modelo inicial. | Si bien el modelo podría crecer a medida que se implemente y a medida que el sistema tambien crece, se decide plantear unicamente un modelo inicial, con las entidades consideradas claves y asociando las responsabilidades necesarias para satisfacer los casos de uso considerados en esta iteración (Las responsabilidades de cada entidad pueden verse en los diagramas del paso siguiente). |  
+| Creación de un modelo inicial. | Si bien el modelo podría crecer a medida que se implemente y a medida que el sistema tambien crece, se decide plantear unicamente un modelo inicial, con las entidades consideradas claves y asociando las responsabilidades necesarias para satisfacer los casos de uso considerados en esta iteración (Las responsabilidades de cada entidad pueden verse en los diagramas del paso siguiente). |  
 | Descomposición de los objetos en módulos ubicados en diferentes capas. | En esta instancia, se asegura la identificación de módulos necesarios para los casos de uso principales considerados como drivers en esta iteración. A su vez se deberán crear pruebas unitarias para dichos módulos, esto quedará registrado como un nuevo aspecto conserniente a la arquitectura (ArqCon2). |
 | Conexión con la base de datos. | En la capa de datos, existirán los módulos necesarios para la implementación del patron DAO para el acceso a los datos. La base de datos se encuentra en la nube y se decide utilizar los servicios de Oracle. | 
 
@@ -263,16 +275,28 @@ En el diagrama se pueden ver los métodos iniciales que surgen para los casos de
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS27"></a>
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
 | ----------- | --------------------- | ---------------------- | ------------------------------------------------- |
-| | CU1 - Comprar || Se encuentra parcialemnte abordado dado que la conexión con el servicio externo de pagos no esta completamente definida. |
-| | CU2 - Vender || Se encuentra parcialemnte abordado dado que la conexión con el servicio externo de pagos no esta completamente definida. |
-| | | CU3 - Actualizar Stock | Se considera completamente abordado con la interfaz de CRUD de la base de datos. |
+| | CU1 - Comprar || Se encuentra parcialemnte abordado dado que la conexión con el servicio externo de pagos no esta completamente definida, ni la interfaz de usuario. |
+| | CU2 - Vender || Se encuentra parcialemnte abordado dado que la conexión con el servicio externo de pagos no esta completamente definida, ni la interfaz de usuario.  |
+| | CU3 - Actualizar Stock || Se considera parcualmente abordado con la interfaz de CRUD de la base de datos. Resta la interfaz de usuario. |
 
 ## *Iteración 3* <a name="idI3"></a>
 ## Step 2: Establecer objetivo de iteración mediante la selección de drivers<a name="idS32"></a>  
 
 ## Step 3: Elegir uno o más elementos del sistema para refinar <a name="idS33"></a>
+En esta iteración será necesario definir la comunicación entre el cliente y el servidor. Como se mencionó en la primera iteración, se requerirá la creación de una API REST.
 ## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS34"></a>
 ## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS35"></a>
 ## Step 6: Diagramas <a name="idS66"></a>
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS37"></a>
+
+## *Iteración 4* <a name="idI4"></a>
+## Step 2: Establecer objetivo de iteración mediante la selección de drivers<a name="idS42"></a>  
+
+## Step 3: Elegir uno o más elementos del sistema para refinar <a name="idS43"></a>
+En esta iteracion sera necesario refinar el cliente definido en la primer iteración.
+## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS44"></a>
+## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS45"></a>
+## Step 6: Diagramas <a name="idS46"></a>
+
+## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS47"></a>
