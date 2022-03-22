@@ -281,12 +281,36 @@ En el diagrama se pueden ver los métodos iniciales que surgen para los casos de
 
 ## *Iteración 3* <a name="idI3"></a>
 ## Step 2: Establecer objetivo de iteración mediante la selección de drivers<a name="idS32"></a>  
+El objetivo de esta iteración es definir la comunicación, tanto entre el cliente y el servidor como con servicios externos.
+Se seleccionan los siguientes drivers:
+* QA-3 (Accuracy)
+* QA-5 (Seguridad, en los pagos)
+* QA-8 (Performance)
+* Restric 4: La aplicación debe comunicarse con las API de heladeras, kioscos y métodos de pago. 
+
+Los casos de uso 1, 2 y 5 serán tenidos en cuenta también dado que la comunicación es fundamental para completar sus funciones.
 
 ## Step 3: Elegir uno o más elementos del sistema para refinar <a name="idS33"></a>
-En esta iteración será necesario definir la comunicación entre el cliente y el servidor. Como se mencionó en la primera iteración, se requerirá la creación de una API REST.
+Se refinará la capa de servicio presente en el servidor, que en la iteración anterior no fue abordado. Esta capa se encuentra a cargo de la comunicación entre el cliente y el servidor. Como se decidió en la primera iteración, se requerirá la creación de una API REST.
+
 ## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS34"></a>
+| Decisiones de diseño y ubicación | Razón fundamental |
+| -------------------------------- | ----------------- |
+|  |   |
+|  |   |
+
+
 ## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS35"></a>
+| Decisiones de diseño y ubicación | Razón fundamental |
+| -------------------------------- | ----------------- |
+| Creacion de endpoints - Construcción de mensajes | Crear soporte para las operaciones necesarias básicas de la API (GET, POST, PUT, DELETE). |
+| Crear interfaces de conexión con servicios externos. | Serán necesarias interfaces para poder conectar con APIs externas y realizar las solicitudes correspondientes. |
+
+
 ## Step 6: Diagramas <a name="idS66"></a>
+Como se detalló en el diagrama inicial de la arquitectura (iteración 1) la capa de servicios tiene 2 partes diferenciadas, por un lado la comunicación con servicios externos (Interfaz de servicios) y por otro la definicion de los endpoints correspondientes para proveer información hacia el exterior (Construcción de mensajes). 
+![Diagrama de Servicios Iteración 1](/Images/ServiceLayer-it1.png "Diagrama de Servicios Iteración 1.")
+
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS37"></a>
 
