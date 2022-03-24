@@ -283,15 +283,15 @@ En el diagrama se pueden ver los métodos iniciales que surgen para los casos de
 ## Step 2: Establecer objetivo de iteración mediante la selección de drivers<a name="idS32"></a>  
 El objetivo de esta iteración es definir la comunicación, tanto entre el cliente y el servidor como con servicios externos.
 Se seleccionan los siguientes drivers:
+* QA-2 (Disponibilidad)
 * QA-3 (Accuracy)
 * QA-5 (Seguridad, en los pagos)
-* QA-8 (Performance)
 * Restric 4: La aplicación debe comunicarse con las API de heladeras, kioscos y métodos de pago. 
 
 Los casos de uso 1, 2 y 5 serán tenidos en cuenta también dado que la comunicación es fundamental para completar sus funciones.
 
 ## Step 3: Elegir uno o más elementos del sistema para refinar <a name="idS33"></a>
-Se refinará la capa de servicio presente en el servidor, que en la iteración anterior no fue abordado. Esta capa se encuentra a cargo de la comunicación entre el cliente y el servidor. Como se decidió en la primera iteración, se requerirá la creación de una API REST.
+Se refinarán más de un elemento en paralelo para satisfacer los drivers seleccionados. Los elementao0s a refinar son: la capa de servicio presente en el servidor, que en la iteración anterior no fue abordado. Esta capa se encuentra a cargo de la comunicación entre el cliente y el servidor. Como se decidió en la primera iteración, se requerirá la creación de una API REST.
 
 ## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS34"></a>
 | Decisiones de diseño y ubicación | Razón fundamental |
@@ -303,7 +303,7 @@ Se refinará la capa de servicio presente en el servidor, que en la iteración a
 ## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS35"></a>
 | Decisiones de diseño y ubicación | Razón fundamental |
 | -------------------------------- | ----------------- |
-| Creacion de endpoints - Construcción de mensajes | Crear soporte para las operaciones necesarias básicas de la API (GET, POST, PUT, DELETE). |
+| Creacion de endpoints - Construcción de mensajes | Crear soporte para las operaciones necesarias básicas de la API (GET, POST, PUT, DELETE). En lenguaje Java |
 | Crear interfaces de conexión con servicios externos. | Serán necesarias interfaces para poder conectar con APIs externas y realizar las solicitudes correspondientes. |
 
 
@@ -313,14 +313,32 @@ Como se detalló en el diagrama inicial de la arquitectura (iteración 1) la cap
 
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS37"></a>
+| No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
+| ----------- | --------------------- | ---------------------- | ------------------------------------------------- |
+|||||
+|||||
 
 ## *Iteración 4* <a name="idI4"></a>
 ## Step 2: Establecer objetivo de iteración mediante la selección de drivers<a name="idS42"></a>  
+Los drivers no completados según el step 7 de la iteracion anterior son:
+* CU1 - Comprar
+* CU2 - Vender
+* CU5 - Actualizar stock
+* 
 
 ## Step 3: Elegir uno o más elementos del sistema para refinar <a name="idS43"></a>
-En esta iteracion sera necesario refinar el cliente definido en la primer iteración.
+En esta iteración se refinarán los componentes del cliente definido en la primer iteración.
+
 ## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS44"></a>
+
+| Decisiones de diseño y ubicación | Razón fundamental |
+| -------------------------------- | ----------------- |
+|||
+|||
+
+
 ## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS45"></a>
+
 ## Step 6: Diagramas <a name="idS46"></a>
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS47"></a>
