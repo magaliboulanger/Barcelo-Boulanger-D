@@ -60,7 +60,7 @@ Casos:
 * Aplicación web accesible desde móviles y diferentes plataformas (Windows, Linux, OsX).
 * Los distribuidores y usuarios podrían tener bajo ancho de banda.
 * Debe soportarse un mínimo de 100 usuarios simultáneos.
-* La aplicación debe comunicarse con las API de heladeras, kioscos y métodos de pago.
+* La aplicación debe comunicarse con las API de heladeras y métodos de pago.
 
 # Aspectos concernientes a la arquitectura
 * Establecer una arquitectura inicial para la definicion general del sistema.
@@ -87,8 +87,7 @@ Casos:
     2. [Step 3](#idS33)  
     3. [Step 4](#idS34) 
     4. [Step 5](#idS35)  
-    5. [Step 6](#idS36)  
-    6. [Step 7](#idS37)
+    5. [Step 7](#idS37)
 5. [Iteracion 4](#idI4)  
     1. [Step 2](#idS42)  
     2. [Step 3](#idS43)  
@@ -294,29 +293,51 @@ Los casos de uso 1, 2 y 5 serán tenidos en cuenta también dado que la comunica
 Se refinarán más de un elemento en paralelo para satisfacer los drivers seleccionados. Los elementao0s a refinar son: la capa de servicio presente en el servidor, que en la iteración anterior no fue abordado. Esta capa se encuentra a cargo de la comunicación entre el cliente y el servidor. Como se decidió en la primera iteración, se requerirá la creación de una API REST.
 
 ## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS34"></a>
-| Decisiones de diseño y ubicación | Razón fundamental |
-| -------------------------------- | ----------------- |
-|  |   |
-|  |   |
-
+Los conceptos de diseño seleccionados hasta el momento son suficientes para la definicion de los elementos a refinar. Por lo que en esta iteración no se seleccionarán nuevos.
 
 ## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS35"></a>
 | Decisiones de diseño y ubicación | Razón fundamental |
 | -------------------------------- | ----------------- |
-| Creacion de endpoints - Construcción de mensajes | Crear soporte para las operaciones necesarias básicas de la API (GET, POST, PUT, DELETE). En lenguaje Java |
+| Creacion de endpoints - Construcción de mensajes | Crear soporte para las operaciones necesarias básicas de la API (GET, POST, PUT, DELETE). En lenguaje Java. Satisface con el driver QA-3 Accuracy. |
 | Crear interfaces de conexión con servicios externos. | Serán necesarias interfaces para poder conectar con APIs externas y realizar las solicitudes correspondientes. |
+| Creacion del módulo de fallos. | Este módulo, presente en el servidor REST, es requerido para satisfacer el QA-2 Disponibilidad y efectuar los rollbacks en caso de falos en el normal funcionamiento del sistema. | 
 
-
-## Step 6: Diagramas <a name="idS66"></a>
 Como se detalló en el diagrama inicial de la arquitectura (iteración 1) la capa de servicios tiene 2 partes diferenciadas, por un lado la comunicación con servicios externos (Interfaz de servicios) y por otro la definicion de los endpoints correspondientes para proveer información hacia el exterior (Construcción de mensajes). 
 ![Diagrama de Servicios Iteración 1](/Images/ServiceLayer-it1.png "Diagrama de Servicios Iteración 1.")
 
+**Construcción de mensajes**
+Se definen a continucación endpoints básicos necesarios para la comunicación con el cliente.
+
+| Endpoint | Descripción | 
+| -------- | ----------- | 
+| /products | Retorna todos los productos en stock en el sistema. | 
+| /products/id | Un producto en particular. | 
+| /stores | Retorna todos los distribuidores en el sistema.| 
+| /stores/id | Un distribuidor en particular | 
+| /stores/id/products | Todos los productos disponibles en un distribuidor en particular. | 
+| /stores/id/score | Puntuación de un distribuidor. | 
+| /products/id/score | Puntuación de un producto. | 
+| /products/id/comments | Comentarios sobre un producto. | 
+| /stores/id/comments | Comentarios sobre un distribuidor. | 
+| /promotions | Listado de promociones aplicables. | 
+| /users | Listado de usuarios en el sistema. | 
+
+**Servicios externos**
+Para la comunicación con servicios externos se necesitan interfaces para realizar los pedidos o requests a las APIs correspondientes:
+- API PayPal (Método de pago seleccionado a priori).
+- API Google Maps: Para integrar un mapa y mostrar los locales o distribuidores en él.
+- API heladeras: Para actualizar stock y conocer el stock disponible.
+
+**Módulo de gestión de fallos**
+Al momento de detectar un error en el sistema se debe asegurar la correctitud de los datos, para esto se descartará toda la transacción y se volverá al estado inicial. Por ejemplo, si existe una falla al momento de confirmar el pago de una compra, no se volverá a la página de pagos sino a un estado previo a este, en el carrito de compras. Se requiere la creación del módulo dado que no solo debe vaciar la información de la transacción que se encontraba en curso sino chequear que el estado del sistema sea consistente.
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS37"></a>
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
 | ----------- | --------------------- | ---------------------- | ------------------------------------------------- |
-|||||
-|||||
+| | | QA-2 (Disponibilidad) | Asegurado y completo con la creación del módulo de fallos. |
+| | QA-3 (Accuracy) | | Parcialmente abordado dado que depende de la correcta implementación de la API definida en esta iteración. |
+| | QA-5 (Seguridad, en los pagos) | | Se considera parcialemtne abordado dado que se delega a la plataforma de pagos la responsabilidad, dado que al conectar con la API de PayPal en este caso se haran las solicitudes correspondientes y ellos procesarán el pago. |
+| | | Restric 4 | Abordado dado que se crearán las interfaces necesarias. |
 
 ## *Iteración 4* <a name="idI4"></a>
 ## Step 2: Establecer objetivo de iteración mediante la selección de drivers<a name="idS42"></a>  
@@ -324,21 +345,25 @@ Los drivers no completados según el step 7 de la iteracion anterior son:
 * CU1 - Comprar
 * CU2 - Vender
 * CU5 - Actualizar stock
-* 
 
 ## Step 3: Elegir uno o más elementos del sistema para refinar <a name="idS43"></a>
-En esta iteración se refinarán los componentes del cliente definido en la primer iteración.
+En esta iteración se refinarán los componentes del cliente definido en la primer iteración siguiendo los drivers seleccionados en el step anterior.
 
 ## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS44"></a>
 
 | Decisiones de diseño y ubicación | Razón fundamental |
 | -------------------------------- | ----------------- |
-|||
-|||
-
+| Utilización del patrón MVC en el cliente. | Se crearán las Views correspondientes en la capa de Presentación. |
+| Creación de la API de conexion del cliente en la capa de servicios. | En esta capa se dará soporte para conectarse a la web desde cualquier dispositivo con conexión a internet y a su vez se definirán las interfaces necesarias para realizar las solicitudes al servidor REST. | 
+| Caché de datos. | Se crea una cache en el cliente para mantener la información de solicitudes recientesy evitar peticiones repetidas al servidor. Se descarta el uso de Proxy dado que, si la página no está en caché, la carga será más lenta ya que se trata de un intermediario más. Además la privacidad de los datos podría verse afectada y esto resultar un problema. | 
 
 ## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS45"></a>
 
 ## Step 6: Diagramas <a name="idS46"></a>
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS47"></a>
+| No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
+| ----------- | --------------------- | ---------------------- | ------------------------------------------------- |
+| | | CU-1 Comprar | Completamente abordado dado que se provee la interfaz de usuario para realizar compras, único punto restante. | 
+| | | CU-2 Vender | Completamente abordado dado que se provee la interfaz de usuario para realizar ventas, único punto restante. | 
+| | | CU-5 Actualizar stock | Completamente abordado dado que se provee la interfaz de usuario para actualizar el stock para distribuidores, único punto restante. | 
