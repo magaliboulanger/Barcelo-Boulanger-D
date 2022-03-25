@@ -305,7 +305,7 @@ Los conceptos de diseño seleccionados hasta el momento son suficientes para la 
 Como se detalló en el diagrama inicial de la arquitectura (iteración 1) la capa de servicios tiene 2 partes diferenciadas, por un lado la comunicación con servicios externos (Interfaz de servicios) y por otro la definicion de los endpoints correspondientes para proveer información hacia el exterior (Construcción de mensajes). 
 ![Diagrama de Servicios Iteración 1](/Images/ServiceLayer-it1.png "Diagrama de Servicios Iteración 1.")
 
-**Construcción de mensajes**
+**Construcción de mensajes**  
 Se definen a continucación endpoints básicos necesarios para la comunicación con el cliente.
 
 | Endpoint | Descripción | 
@@ -322,13 +322,13 @@ Se definen a continucación endpoints básicos necesarios para la comunicación 
 | /promotions | Listado de promociones aplicables. | 
 | /users | Listado de usuarios en el sistema. | 
 
-**Servicios externos**
+**Servicios externos**  
 Para la comunicación con servicios externos se necesitan interfaces para realizar los pedidos o requests a las APIs correspondientes:
 - API PayPal (Método de pago seleccionado a priori).
 - API Google Maps: Para integrar un mapa y mostrar los locales o distribuidores en él.
 - API heladeras: Para actualizar stock y conocer el stock disponible.
 
-**Módulo de gestión de fallos**
+**Módulo de gestión de fallos**  
 Al momento de detectar un error en el sistema se debe asegurar la correctitud de los datos, para esto se descartará toda la transacción y se volverá al estado inicial. Por ejemplo, si existe una falla al momento de confirmar el pago de una compra, no se volverá a la página de pagos sino a un estado previo a este, en el carrito de compras. Se requiere la creación del módulo dado que no solo debe vaciar la información de la transacción que se encontraba en curso sino chequear que el estado del sistema sea consistente.
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS37"></a>
