@@ -162,21 +162,22 @@ Dado que es la primera iteración, el único elemento disponible a refinar es el
 
 ## Step 6: Diagramas <a name="idS6"></a>
 **Diagrama de Arquitectura Inicial** 
-![Diagrama de Arquitectura Inicial](/Images/DiagramaInicial.png "Diagrama de arquitectura inicial.")
+![Diagrama de Arquitectura Inicial](/Images/ArquitecturaInicial-Componentes.png "Diagrama de componentes y conectores de la arquitectura inicial.")
+Diagrama de componentes y conectores de la arquitectura inicial.
+
 | Elemento | Responsabilidad |
 | ---------- | ------------------- |
-| Capa de presentación | Esta capa contiene módulos que controlan las interacciones del usuario. |
-| Capa de negocios | Esta capa contiene módulos encargados del control de las reglas del negocio. |
+| Capa de presentación | Esta capa contiene componentes que controlan las interacciones del usuario. |
+| Capa de negocios | Esta capa contiene componentes encargados del control de las reglas del negocio. |
 | Entidades del negocio | Entidades que forman parte del modelo del dominio. |
-| Componentes del negocio | Estos componentes implementan operaciones del negocio. |
 | Capa de Datos | Esta capa es la encargada de la persistencia de los datos.|
 | Acceso a datos | Este componente es el encargado de la persistencia de los datos en una base de datos relacional, utilizará patrones para abstraer el comportamiento de modo que la base puede ser fácilmente extendida o reemplazada.  |
 | Componente transversal | Este componente contiene funcionalidad que atraviesa varias capas, como la seguridad, la recuperación de fallos y la comunicación. | 
-| Capa de servicios | Esta capa contiene módulos para exponer servicios utilizados por el cliente y también para la comunicación con servicios externos |
+| Capa de servicios | Esta capa contiene componentes para exponer servicios utilizados por el cliente y también para la comunicación con servicios externos |
 | Cache | Conserva los últimos datos solicitados a la capa de datos del otro tier. |
    
 **Diagrama de Deployment** 
-![Diagrama de Deployment Inicial](/Images/DiagramaDeploymentInicial.jpeg "Diagrama de deployment inicial.")
+![Diagrama de Deployment Inicial](/Images/DiagramaDeploymentInicial.png "Diagrama de deployment inicial.")
 
   
 | Elemento | Responsabilidad |
@@ -290,7 +291,7 @@ Se seleccionan los siguientes drivers:
 Los casos de uso 1, 2 y 5 serán tenidos en cuenta también dado que la comunicación es fundamental para completar sus funciones.
 
 ## Step 3: Elegir uno o más elementos del sistema para refinar <a name="idS33"></a>
-Se refinarán más de un elemento en paralelo para satisfacer los drivers seleccionados. Los elementao0s a refinar son: la capa de servicio presente en el servidor, que en la iteración anterior no fue abordado. Esta capa se encuentra a cargo de la comunicación entre el cliente y el servidor. Como se decidió en la primera iteración, se requerirá la creación de una API REST.
+Se refinarán más de un elemento en paralelo para satisfacer los drivers seleccionados. Los elementos a refinar son: la capa de servicio presente en el servidor, que en la iteración anterior no fue abordado. Esta capa se encuentra a cargo de la comunicación entre el cliente y el servidor. Como se decidió en la primera iteración, se requerirá la creación de una API REST.
 
 ## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS34"></a>
 Los conceptos de diseño seleccionados hasta el momento son suficientes para la definicion de los elementos a refinar. Por lo que en esta iteración no se seleccionarán nuevos.
@@ -315,7 +316,7 @@ Se definen a continucación endpoints básicos necesarios para la comunicación 
 | /stores | Retorna todos los distribuidores en el sistema.| 
 | /stores/id | Un distribuidor en particular | 
 | /stores/id/products | Todos los productos disponibles en un distribuidor en particular. | 
-| /stores/id/score | Puntuación de un distribuidor. | 
+| /stores/id/score | Puntuación de un distribuidor. |   
 | /products/id/score | Puntuación de un producto. | 
 | /products/id/comments | Comentarios sobre un producto. | 
 | /stores/id/comments | Comentarios sobre un distribuidor. | 
@@ -367,3 +368,9 @@ En esta iteración se refinarán los componentes del cliente definido en la prim
 | | | CU-1 Comprar | Completamente abordado dado que se provee la interfaz de usuario para realizar compras, único punto restante. | 
 | | | CU-2 Vender | Completamente abordado dado que se provee la interfaz de usuario para realizar ventas, único punto restante. | 
 | | | CU-5 Actualizar stock | Completamente abordado dado que se provee la interfaz de usuario para actualizar el stock para distribuidores, único punto restante. | 
+
+
+## Cierre
+**Puntos pendientes**
+
+*Seguridad*
