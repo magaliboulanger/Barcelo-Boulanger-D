@@ -261,7 +261,7 @@ A continuación se detallan las responsabilidades de cada uno:
 
 Entonces, una vez que el usuario tenga los productos en su carrito e inicie la compra (en el caso de un distribuidor sería una venta pero el flujo es el mismo) el cliente comunica los datos de esta transacción al servidor, el cual debe solicitar servicios externos como por ejemplo la comunicación con Paypal (o la API de pagos utilizada), verificar el resultado de la operación y actualizar la información en el almacenamiento.   
 
-**Módulos Iniciales**
+**Módulos Iniciales**   
 ![Diagrama de Módulos](/Images/ModulosIniciales.png "Diagrama de módulos inicial.")   
 Luego del ejemplo anterior podemos concluir en este diagrama.     
 | Elemento | Responsabilidad | 
