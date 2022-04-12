@@ -216,8 +216,10 @@ El objetivo de esta iteración es que la funcionalidad primaria previamente defi
 * CU1: Comprar   
 * CU2: Vender  
 * CU5: Actualizar stock  
+
 ## Step 3: Elegir uno o más elementos del sistema para refinar <a name="idS23"></a>
-Partiendo del diseño inicial, definido en la iteración anterior, los elementos a refinar seleccionados para esta iteración son los módulos ubicados en capas en el Servidor alojado en el Tier 2, el cual sigue las arquitecturas de referencia seleccionadas.  
+Partiendo del diseño inicial, definido en la iteración anterior, los elementos a refinar seleccionados para esta iteración son los componentes ubicados en capas en el Servidor alojado en el Tier 2, el cual sigue las arquitecturas de referencia seleccionadas.  
+Se refinaran y detallarán estos para dar soporte a los drivers seleccionados en esta iteración. 
 
 ## Step 4: Elegir conceptos de diseño que satisfagan los drivers seleccionados <a name="idS24"></a>
 | Decisiones de diseño y ubicación | Razón fundamental |
@@ -231,7 +233,7 @@ Partiendo del diseño inicial, definido en la iteración anterior, los elementos
 ## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS25"></a>
 | Decisión de diseño y ubicación | Razón fundamental |
 | --------------------------------------- | ----------------------- |
-| Creación de un modelo inicial. | Si bien el modelo podría crecer a medida que se implemente y a medida que el sistema tambien crece, se decide plantear unicamente un modelo inicial, con las entidades consideradas claves y asociando las responsabilidades necesarias para satisfacer los casos de uso considerados en esta iteración (Las responsabilidades de cada entidad pueden verse en los diagramas del paso siguiente). |  
+| Creación de un modelo inicial. | Si bien el modelo podría crecer a medida que se implemente y a medida que el sistema también crezca, se decide plantear únicamente un modelo inicial, con las entidades consideradas claves y asociando las responsabilidades necesarias para satisfacer los casos de uso considerados en esta iteración (Las responsabilidades de cada entidad pueden verse en los diagramas del paso siguiente). |  
 | Descomposición de los objetos en módulos ubicados en diferentes capas. | En esta instancia, se asegura la identificación de módulos necesarios para los casos de uso principales considerados como drivers en esta iteración. A su vez se deberán crear pruebas unitarias para dichos módulos, esto quedará registrado como un nuevo aspecto conserniente a la arquitectura (ArqCon2). |
 | Conexión con la base de datos. | En la capa de datos, existirán los módulos necesarios para la implementación del patron DAO para el acceso a los datos. La base de datos se encuentra en la nube y se decide utilizar los servicios de Oracle. | 
 
@@ -240,11 +242,13 @@ Partiendo del diseño inicial, definido en la iteración anterior, los elementos
 **Diagrama del modelo inicial**
 
 ![Diagrama del Modelo Inicial](/Images/ModeloInicial.png "Diagrama del modelo inicial.")
+Diagrama correspondiente a las entidades del dominio que se encuentran en la capa de nocios de la arquitectura inicial planteada en la iteración anterior.
 
-**Diagrama del módulos inicial**
-![Diagrama del Módulos Inicial](/Images/ModulosInicialesFuncionalidadPrimaria.png "Diagrama del módulos inicial.")  
-Esta imagen muestra los módulos iniciales requeridos para soportar la funcionalidad primaria, ubicados en sus respectivas capas.
-A continuación se detallan las responsabilidades de cada uno de ellos:
+**Diagrama de módulos inicial requeridos para un ejemplo de Compra**
+![Diagrama de Módulos Inicial Compra](/Images/ModulosInicialesFuncionalidadPrimaria.png "Diagrama de módulos inicial ejemplo de compra.")  
+Esta imagen muestra los módulos iniciales requeridos para soportar una compra sin considerar el agregado de los productos al carrito, los módulos se encuentran ubicados en sus respectivas capas provenientes del servidor detallado en el diagrama de la arquitectura inicial definido en la primer iteración. 
+
+A continuación se detallan las responsabilidades de cada uno:
 | Elemento | Responsabilidad |
 | ---------- | ------------------- |
 | TransaccionView | Muestra el estado de la compra o venta (tanto para el cliente como para el distribuidor respectivamente) y se actualiza en función del resultado (Pago aceptado-rechazado) informando al usuario. Este componente puede contener dentro más de un elemento perteneciente a la UI que resulten necesarios. |
@@ -254,6 +258,18 @@ A continuación se detallan las responsabilidades de cada uno de ellos:
 | TransaccionController | Contiene la lógica del negocio necesaria para llevar a cabo una transacción, la misma puede ser tanto una compra ocmo una venta según el diseño presentado en el diagrama anterior. |
 | Entidades del dominio | Contiene todas las entidades del dominio descriptas en el diagrama anterior.|
 | Módulos DAO | Conexión con la base de datos siguiendo el patrón DAO para las operaciones CRUD. |
+
+Entonces, una vez que el usuario tenga los productos en su carrito e inicie la compra (en el caso de un distribuidor sería una venta pero el flujo es el mismo) el cliente comunica los datos de esta transacción al servidor, el cual debe solicitar servicios externos como por ejemplo la comunicación con Paypal (o la API de pagos utilizada), verificar el resultado de la operación y actualizar la información en el almacenamiento. 
+
+**Módulos Iniciales**
+![Diagrama de Módulos](/Images/ModulosIniciales.png "Diagrama de módulos inicial.") 
+Luego del ejemplo anterior podemos concluir en este diagrama.   
+| Elemento | Responsabilidad |
+| ---------- | ------------------- |
+| Vistas | Existe uno para cada entidad del negocio que debe mostrarse (todas las detalladas en el diagrama de clases de este step, inicialmente) y para vistas extra compuestas o no por las anteriores que la aplicación requiera. |
+| Controladores | Existe uno para cada entidad del negocio. (Todas las detalladas en el diagrama de clases de este step, inicialmente).|
+| Entidades | Son cada una de las detalladas en el diagrama de clases definido en este step. |
+| DAO implementación | Existe uno para cada entidad del negocio que debe persistir. (Todas las detalladas en el diagrama de clases de este step, inicialmente). |
 
 
 **Diagramas de secuencia de los casos de uso primarios**
@@ -304,7 +320,6 @@ Los conceptos de diseño seleccionados hasta el momento son suficientes para la 
 | Creacion del módulo de fallos. | Este módulo, presente en el servidor REST, es requerido para satisfacer el QA-2 Disponibilidad y efectuar los rollbacks en caso de falos en el normal funcionamiento del sistema. | 
 
 Como se detalló en el diagrama inicial de la arquitectura (iteración 1) la capa de servicios tiene 2 partes diferenciadas, por un lado la comunicación con servicios externos (Interfaz de servicios) y por otro la definicion de los endpoints correspondientes para proveer información hacia el exterior (Construcción de mensajes). 
-![Diagrama de Servicios Iteración 1](/Images/ServiceLayer-it1.png "Diagrama de Servicios Iteración 1.")
 
 **Construcción de mensajes**  
 Se definen a continucación endpoints básicos necesarios para la comunicación con el cliente.
@@ -374,3 +389,10 @@ En esta iteración se refinarán los componentes del cliente definido en la prim
 **Puntos pendientes**
 
 *Seguridad*
+Si bien se condiredo la seguridad en los pagos y se delegó esta responsabilidad a las plataformas de pago seleccionadas, existe en el diagrama inicial del sistema un componente especifica de seguridad (dentro del componente transversal) que no fue abordado. El mismo debe asegurar la seguridad de los datos sensibles de usuario en el propio sistema.
+
+*Módulo de fallos*
+La idea general de este módulo fue descripta en la iteración 3 pero aún requiere refinamiento para ser llevada a cabo. 
+
+*Entidades del negocio*
+Las entidades y la definición del modelo se hicieron en base a los caso de uso principales, por lo que no se encuentran detalladas todas las clases necesarias para el sistema entero. Para tener un diagrama completo deben abordarse todas las funcionalidades del sistema.
