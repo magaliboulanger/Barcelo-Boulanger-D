@@ -92,9 +92,7 @@ Casos:
     1. [Step 2](#idS42)  
     2. [Step 3](#idS43)  
     3. [Step 4](#idS44) 
-    4. [Step 5](#idS45)  
-    5. [Step 6](#idS46)  
-    6. [Step 7](#idS47)
+    4. [Step 7](#idS47)
 
 ## Step 1: Review Inputs<a name="idS1"></a>
 | Categoria | Detalles |
@@ -369,13 +367,9 @@ En esta iteración se refinarán los componentes del cliente definido en la prim
 
 | Decisiones de diseño y ubicación | Razón fundamental |
 | -------------------------------- | ----------------- |
-| Utilización del patrón MVC en el cliente. | Se crearán las Views correspondientes en la capa de Presentación. |
+| Utilización del patrón MVC en el cliente. | Se crearán las Views correspondientes en la capa de Presentación. Esta decisión ya fue tenida en cuenta en diagramas de iteraciones anteriores. |
 | Creación de la API de conexion del cliente en la capa de servicios. | En esta capa se dará soporte para conectarse a la web desde cualquier dispositivo con conexión a internet y a su vez se definirán las interfaces necesarias para realizar las solicitudes al servidor REST. | 
-| Caché de datos. | Se crea una cache en el cliente para mantener la información de solicitudes recientesy evitar peticiones repetidas al servidor. Se descarta el uso de Proxy dado que, si la página no está en caché, la carga será más lenta ya que se trata de un intermediario más. Además la privacidad de los datos podría verse afectada y esto resultar un problema. | 
-
-## Step 5: Crear instancias de elementos arquitectónicos, asignar responsabilidades y definir interfaces <a name="idS45"></a>
-
-## Step 6: Diagramas <a name="idS46"></a>
+| Caché de datos. | Se crea una cache en el cliente para mantener la información de solicitudes recientes y evitar peticiones repetidas al servidor. Se descarta el uso de Proxy dado que, si la página no está en caché, la carga será más lenta ya que se trata de un intermediario más. Además la privacidad de los datos podría verse afectada y esto resultar un problema. | 
 
 ## Step 7: Análisis y revisión de los objetivos de la iteración <a name="idS47"></a>
 | No abordado | Parcialmente abordado | Completamente abordado | Decisiones de diseño tomadas durante la iteración |
