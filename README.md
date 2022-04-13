@@ -92,7 +92,8 @@ Casos:
     1. [Step 2](#idS42)  
     2. [Step 3](#idS43)  
     3. [Step 4](#idS44) 
-    4. [Step 7](#idS47)
+    4. [Step 7](#idS47)  
+[Cierre](#cierre) 
 
 ## Step 1: Review Inputs<a name="idS1"></a>
 | Categoria | Detalles |
@@ -379,14 +380,14 @@ En esta iteración se refinarán los componentes del cliente definido en la prim
 | | | CU-5 Actualizar stock | Completamente abordado dado que se provee la interfaz de usuario para actualizar el stock para distribuidores, único punto restante. | 
 
 
-## Cierre
+## Cierre <a name="cierre"></a>
 **Puntos pendientes**
 
-*Seguridad*
+*Seguridad*  
 Si bien se condiredo la seguridad en los pagos y se delegó esta responsabilidad a las plataformas de pago seleccionadas, existe en el diagrama inicial del sistema un componente especifica de seguridad (dentro del componente transversal) que no fue abordado. El mismo debe asegurar la seguridad de los datos sensibles de usuario en el propio sistema.
 
-*Módulo de fallos*
+*Módulo de fallos*  
 La idea general de este módulo fue descripta en la iteración 3 pero aún requiere refinamiento para ser llevada a cabo. 
 
-*Entidades del negocio*
+*Entidades del negocio*  
 Las entidades y la definición del modelo se hicieron en base a los caso de uso principales, por lo que no se encuentran detalladas todas las clases necesarias para el sistema entero. Para tener un diagrama completo deben abordarse todas las funcionalidades del sistema.
