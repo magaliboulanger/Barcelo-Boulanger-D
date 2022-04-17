@@ -389,5 +389,13 @@ Si bien se condiredo la seguridad en los pagos y se delegó esta responsabilidad
 *Módulo de fallos*  
 La idea general de este módulo fue descripta en la iteración 3 pero aún requiere refinamiento para ser llevada a cabo. 
 
+*Componente Transversal*
+Los dos puntos pendientes mencionados anterioremente corresponden a este componente, al cual se definió inicialmente como un componente transversal dado que se requiere de él en todas las capas. SI bien esta idea está clara, falta ahondar también en el modo en que este componente será parte del sistema lo cual va de la mano con pensar en detalle el módulo de fallos y de seguridad, y sus conexiones con el resto de las capas.
+
 *Entidades del negocio*  
 Las entidades y la definición del modelo se hicieron en base a los caso de uso principales, por lo que no se encuentran detalladas todas las clases necesarias para el sistema entero. Para tener un diagrama completo deben abordarse todas las funcionalidades del sistema.
+
+*Otros*
+Escapan también a este diseño cuestiones relativas al despliegue de una página web y a datos analíticos por ejemplo, que serían muy útiles pero no así elementales para un diseño inicial. 
+
+
